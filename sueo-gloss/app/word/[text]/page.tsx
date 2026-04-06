@@ -70,26 +70,24 @@ export default function WordPage() {
           </div>
         )}
 
-        {/* Sign description */}
-        {signData?.signDescription && (
-          <div className="bg-card border border-card-border rounded-card p-4 card-shadow mb-4">
-            <p className="text-base text-text-main leading-relaxed">{signData.signDescription}</p>
-          </div>
-        )}
-
-        {/* Sign form images */}
-        {signImages.length > 0 && (
-          <div className="bg-card border border-card-border rounded-card p-4 card-shadow mb-4">
-            <div className="flex gap-2 overflow-x-auto pb-2">
-              {signImages.map((img, i) => (
-                <img
-                  key={i}
-                  src={img.replace("http://", "https://")}
-                  alt={`${wordText} 수형 ${i + 1}`}
-                  className="w-28 h-28 object-cover rounded-xl border border-card-border flex-shrink-0 bg-bg-warm"
-                />
-              ))}
-            </div>
+        {/* Sign description + images — no box separation */}
+        {(signData?.signDescription || signImages.length > 0) && (
+          <div className="px-1 mb-4 space-y-3">
+            {signData?.signDescription && (
+              <p className="text-base text-text-main leading-relaxed">{signData.signDescription}</p>
+            )}
+            {signImages.length > 0 && (
+              <div className="flex gap-2 overflow-x-auto pb-2">
+                {signImages.map((img, i) => (
+                  <img
+                    key={i}
+                    src={img.replace("http://", "https://")}
+                    alt={`${wordText} 수형 ${i + 1}`}
+                    className="w-28 h-28 object-cover rounded-xl border border-card-border flex-shrink-0 bg-bg-warm"
+                  />
+                ))}
+              </div>
+            )}
           </div>
         )}
 

@@ -5,13 +5,13 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
 
 :root {
-  --bg: #F5F0FA;
-  --bg-warm: #EDE6F5;
+  --bg: #FAF6F0;
+  --bg-warm: #F3ECE2;
   --card: #FFFFFF;
-  --card-border: #E2DAF0;
-  --accent: #7C5CFC;
-  --accent-dark: #5A3ED9;
-  --accent-light: #B8A5FF;
+  --card-border: #E8E0D4;
+  --accent: #D97757;
+  --accent-dark: #C4623F;
+  --accent-light: #F0B8A0;
   --sage: #5B8C6F;
   --sage-dark: #4A7A5E;
   --sage-light: #E8F0EB;
@@ -20,9 +20,9 @@
   --warm: #8B7355;
   --warm-light: #A8957D;
   --red: #D44532;
-  --text: #1A1625;
-  --text-sub: #6B6280;
-  --text-light: #9B93AD;
+  --text: #2D2B2A;
+  --text-sub: #7A7168;
+  --text-light: #A69E94;
 }
 
 * {
@@ -106,88 +106,6 @@ body {
   animation: fade-in 0.2s ease-out;
 }
 
-/* Floating star particles */
-@keyframes float-star {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translateY(-8px) scale(1.3);
-    opacity: 0.9;
-  }
-}
-
-@keyframes float-star-slow {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: translateY(-12px) scale(1.2);
-    opacity: 0.7;
-  }
-}
-
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.star-float {
-  animation: float-star 3s ease-in-out infinite;
-}
-
-.star-float-slow {
-  animation: float-star-slow 4.5s ease-in-out infinite;
-}
-
-.star-twinkle {
-  animation: twinkle 2s ease-in-out infinite;
-}
-
-.star-twinkle-delay {
-  animation: twinkle 2.5s ease-in-out infinite 0.8s;
-}
-
-.star-twinkle-delay-2 {
-  animation: twinkle 3s ease-in-out infinite 1.5s;
-}
-
-/* Glassmorphism search bar */
-.glass-search {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.glass-search:focus-within {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 0 24px rgba(124, 92, 252, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.15);
-}
-
-/* Card hover lift */
-.card-lift {
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
-}
-
-.card-lift:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(124, 92, 252, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.card-lift:active {
-  transform: translateY(0) scale(0.97);
-  box-shadow: 0 2px 8px rgba(124, 92, 252, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
 /* Line clamp */
 .line-clamp-1 {
   display: -webkit-box;
@@ -219,34 +137,5 @@ body {
 
 /* Subtle card shadow */
 .card-shadow {
-  box-shadow: 0 2px 8px rgba(124, 92, 252, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
-/* Category card gradient backgrounds */
-.cat-gradient-0 { background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EE 100%); }
-.cat-gradient-1 { background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); }
-.cat-gradient-2 { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); }
-.cat-gradient-3 { background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); }
-.cat-gradient-4 { background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%); }
-.cat-gradient-5 { background: linear-gradient(135deg, #FFF3E0 0%, #FFCC80 100%); }
-.cat-gradient-6 { background: linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 100%); }
-.cat-gradient-7 { background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%); }
-.cat-gradient-8 { background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%); }
-.cat-gradient-9 { background: linear-gradient(135deg, #F1F8E9 0%, #DCEDC8 100%); }
-.cat-gradient-10 { background: linear-gradient(135deg, #FFF9C4 0%, #FFF176 100%); }
-.cat-gradient-11 { background: linear-gradient(135deg, #EDE7F6 0%, #D1C4E9 100%); }
-.cat-gradient-12 { background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%); }
-.cat-gradient-13 { background: linear-gradient(135deg, #FFECD2 0%, #FCB69F 100%); }
-.cat-gradient-14 { background: linear-gradient(135deg, #F0E6FF 0%, #D4BBFF 100%); }
-.cat-gradient-15 { background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%); }
-
-/* Wordbook button gradient */
-.wordbook-gradient {
-  background: linear-gradient(135deg, #7C5CFC 0%, #5A3ED9 100%);
-  transition: all 0.3s ease;
-}
-
-.wordbook-gradient:hover {
-  background: linear-gradient(135deg, #8B6DFF 0%, #6B4FE8 100%);
-  box-shadow: 0 4px 16px rgba(124, 92, 252, 0.3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
 }

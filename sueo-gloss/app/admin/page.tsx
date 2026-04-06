@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import BackButton from "@/components/BackButton";
+import TopNav from "@/components/TopNav";
 
 interface Word {
   text: string;
@@ -155,7 +155,7 @@ export default function AdminPage() {
     <main className="min-h-screen bg-bg pb-8">
       <div className="max-w-app mx-auto px-4">
         <div className="pt-4">
-          <BackButton label="홈으로" />
+          <TopNav />
         </div>
 
         <h1 className="text-xl font-bold text-text-main mt-2 mb-1 tracking-tight">

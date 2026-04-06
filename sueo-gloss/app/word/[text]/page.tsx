@@ -82,7 +82,7 @@ export default function WordPage() {
                     key={i}
                     src={img.replace("http://", "https://")}
                     alt={`${wordText} 수형 ${i + 1}`}
-                    className="w-28 h-28 object-cover rounded-xl border border-card-border flex-shrink-0 bg-bg-warm"
+                    className="rounded-xl border border-card-border bg-bg-warm max-w-full"
                   />
                 ))}
               </div>

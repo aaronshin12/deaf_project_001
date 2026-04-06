@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import OwlMascot from "@/components/OwlMascot";
 import WeekCard from "@/components/WeekCard";
 import { useNotes, useReviewMarks } from "@/lib/useUserData";
+import Link from "next/link";
 
 interface Word {
   text: string;
@@ -41,9 +42,11 @@ export default function Home() {
     <main className="min-h-screen bg-bg pb-8">
       <div className="max-w-app mx-auto px-4">
         {/* Header */}
-        <header className="pt-6 pb-2 text-center">
-          <h1 className="text-2xl font-bold text-text-main">수어글로스</h1>
-          <p className="text-xs text-text-sub mt-1">
+        <header className="pt-8 pb-1 text-center">
+          <h1 className="text-2xl font-bold text-text-main tracking-tight">
+            수어글로스
+          </h1>
+          <p className="text-sm text-text-sub mt-1">
             주차별 한국수어 복습 도구
           </p>
         </header>
@@ -54,10 +57,10 @@ export default function Home() {
         {/* Week list */}
         {loading ? (
           <div className="flex justify-center py-8">
-            <div className="flex gap-1">
-              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
-              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
-              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
+            <div className="flex gap-1.5">
+              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
+              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
+              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
             </div>
           </div>
         ) : curriculum?.weeks ? (
@@ -89,15 +92,25 @@ export default function Home() {
           </div>
         )}
 
+        {/* Admin link */}
+        <div className="mt-8 text-center">
+          <Link
+            href="/admin"
+            className="text-xs text-text-light hover:text-accent transition-colors"
+          >
+            관리자 페이지
+          </Link>
+        </div>
+
         {/* Footer */}
-        <footer className="mt-8 text-center">
-          <p className="text-xs text-text-sub">
+        <footer className="mt-4 text-center pb-4">
+          <p className="text-xs text-text-light">
             수어 데이터 출처:{" "}
             <a
               href="https://sldict.korean.go.kr/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue hover:underline"
+              className="text-accent hover:underline"
             >
               국립국어원 한국수어사전
             </a>

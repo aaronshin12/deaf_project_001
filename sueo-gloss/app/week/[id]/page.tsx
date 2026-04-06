@@ -46,10 +46,10 @@ export default function WeekPage() {
       <main className="min-h-screen bg-bg">
         <div className="max-w-app mx-auto px-4 pt-6">
           <div className="flex justify-center py-16">
-            <div className="flex gap-1">
-              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
-              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
-              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
+            <div className="flex gap-1.5">
+              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
+              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
+              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
             </div>
           </div>
         </div>
@@ -80,17 +80,17 @@ export default function WeekPage() {
         </div>
 
         {/* Week header */}
-        <div className="mt-2 mb-4">
-          <h1 className="text-xl font-bold text-text-main">{week.title}</h1>
+        <div className="mt-2 mb-5">
+          <h1 className="text-xl font-bold text-text-main tracking-tight">{week.title}</h1>
           {week.description && (
-            <p className="text-sm text-text-sub mt-1">{week.description}</p>
+            <p className="text-sm text-text-sub mt-1.5 leading-relaxed">{week.description}</p>
           )}
           <div className="flex items-center gap-4 mt-3">
-            <span className="text-xs text-text-sub">
+            <span className="text-xs text-text-light font-medium">
               총 {week.words.length}개 단어
             </span>
             {reviewCount > 0 && (
-              <span className="text-xs text-yellow flex items-center gap-1">
+              <span className="text-xs text-clay flex items-center gap-1 font-medium">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                 </svg>
@@ -101,7 +101,7 @@ export default function WeekPage() {
         </div>
 
         {/* Word list */}
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           {week.words.map((word) => (
             <WordItem
               key={word.text}

@@ -38,7 +38,6 @@ export default function WordPage() {
     fetch("/api/curriculum")
       .then((res) => res.json())
       .then((data: Curriculum) => {
-        // Find word data
         for (const week of data.weeks) {
           const found = week.words.find((w) => w.text === wordText);
           if (found && !wordData) {
@@ -46,7 +45,6 @@ export default function WordPage() {
           }
         }
 
-        // Find all weeks containing this word
         const weeks = data.weeks
           .filter((w) => w.words.some((word) => word.text === wordText))
           .map((w) => ({ id: w.id, title: w.title }));
@@ -61,10 +59,10 @@ export default function WordPage() {
       <main className="min-h-screen bg-bg">
         <div className="max-w-app mx-auto px-4 pt-6">
           <div className="flex justify-center py-16">
-            <div className="flex gap-1">
-              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
-              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
-              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
+            <div className="flex gap-1.5">
+              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
+              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
+              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
             </div>
           </div>
         </div>
@@ -80,10 +78,10 @@ export default function WordPage() {
         </div>
 
         {/* Word header */}
-        <div className="mt-2 mb-6">
-          <h1 className="text-3xl font-bold text-text-main">{wordText}</h1>
+        <div className="mt-3 mb-6">
+          <h1 className="text-3xl font-bold text-text-main tracking-tight">{wordText}</h1>
           {wordData?.description && (
-            <p className="text-sm text-text-sub mt-2 leading-relaxed">
+            <p className="text-sm text-text-sub mt-2.5 leading-relaxed">
               {wordData.description}
             </p>
           )}
@@ -92,9 +90,9 @@ export default function WordPage() {
         {/* Sign language video button */}
         <button
           onClick={() => setShowDict(true)}
-          className="w-full btn-3d bg-green text-white font-bold py-4 rounded-xl shadow-[0_4px_0_#46A302] hover:brightness-110 transition-all text-lg mb-4 flex items-center justify-center gap-2"
+          className="w-full btn-soft bg-accent text-white font-semibold py-4 rounded-xl shadow-[0_3px_0_#C4623F] hover:brightness-105 transition-all text-lg mb-3 flex items-center justify-center gap-2"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
             <path d="M8 5v14l11-7z" />
           </svg>
           수어 영상 보기
@@ -105,9 +103,9 @@ export default function WordPage() {
           href={buildSearchUrl(wordText)}
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full text-center py-3 rounded-xl border-2 border-card-border text-text-sub hover:text-blue hover:border-blue transition-colors text-sm mb-6"
+          className="block w-full text-center py-3 rounded-xl border border-card-border text-text-sub hover:text-accent hover:border-accent/40 transition-colors text-sm mb-6"
         >
-          수어사전에서 직접 검색하기 →
+          수어사전에서 직접 검색하기
         </a>
 
         {/* Note editor */}

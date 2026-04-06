@@ -20,7 +20,6 @@ export default function NoteEditor({ word, note, onSave }: NoteEditorProps) {
   const handleChange = (newValue: string) => {
     setValue(newValue);
 
-    // Auto-save after 500ms of no typing
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       onSave(word, newValue);
@@ -30,16 +29,16 @@ export default function NoteEditor({ word, note, onSave }: NoteEditorProps) {
   };
 
   return (
-    <div className="bg-card border-2 border-card-border rounded-card p-4">
-      <div className="flex items-center justify-between mb-2">
+    <div className="bg-card border border-card-border rounded-card p-4 card-shadow">
+      <div className="flex items-center justify-between mb-2.5">
         <label className="text-sm font-semibold text-text-main flex items-center gap-2">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#1CB0F6">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#5B8C6F">
             <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
           </svg>
           나의 메모
         </label>
         {isSaved && (
-          <span className="text-xs text-green animate-pulse">저장됨</span>
+          <span className="text-xs text-sage font-medium">저장됨</span>
         )}
       </div>
       <textarea
@@ -47,7 +46,7 @@ export default function NoteEditor({ word, note, onSave }: NoteEditorProps) {
         onChange={(e) => handleChange(e.target.value)}
         placeholder="이 단어에 대한 메모를 남겨보세요..."
         rows={3}
-        className="w-full bg-bg border-2 border-card-border rounded-xl p-3 text-sm text-text-main placeholder-text-sub resize-none outline-none focus:border-blue transition-colors"
+        className="w-full bg-bg border border-card-border rounded-xl p-3 text-sm text-text-main placeholder-text-light resize-none outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all leading-relaxed"
       />
     </div>
   );

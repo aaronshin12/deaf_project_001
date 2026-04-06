@@ -92,7 +92,7 @@ export default function WordPage() {
 
         {/* Data warning */}
         <p className="text-[11px] text-text-light text-center mt-4 mb-2">
-          영상 재생 시 데이터 이용료가 발생할 수 있습니다. Wi-Fi 이용을 권장합니다.
+          영상 재생 시 데이터 이용료가 발생할 수 있습니다. 와이파이 이용을 권장합니다.
         </p>
 
         {/* Dictionary link */}

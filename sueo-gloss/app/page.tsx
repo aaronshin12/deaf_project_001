@@ -156,61 +156,17 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Categories - 3 col grid */}
+        {/* Categories - Android app icon style */}
         {categories.length > 0 && (
-          <div className="grid grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-3 gap-x-3 gap-y-5">
             {categories.map(({ name }) => (
-              <Link key={name} href={`/category/${encodeURIComponent(name)}`}>
-                <div className="bg-card border border-card-border rounded-card p-3.5 card-shadow text-center hover:border-accent/40 transition-all active:scale-[0.97]">
-                  <span className="text-2xl block mb-1">{getEmoji(name)}</span>
-                  <span className="text-sm font-bold text-text-main block">{name}</span>
+              <Link key={name} href={`/category/${encodeURIComponent(name)}`} className="flex flex-col items-center gap-1.5">
+                <div className="w-14 h-14 bg-card border border-card-border rounded-2xl card-shadow flex items-center justify-center text-2xl hover:scale-105 active:scale-95 transition-transform">
+                  {getEmoji(name)}
                 </div>
+                <span className="text-xs font-medium text-text-main text-center leading-tight">{name}</span>
               </Link>
             ))}
-            {/* Fill remaining grid cells with owls on branch */}
-            {categories.length % 3 !== 0 && (
-              <div className={`rounded-card p-2 flex items-end justify-center ${categories.length % 3 === 1 ? "col-span-2" : ""}`}>
-                <svg viewBox="0 0 140 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-                  {/* Branch */}
-                  <path d="M0 60 Q40 50 70 55 Q100 60 140 52" stroke="#C4956A" strokeWidth="4" strokeLinecap="round" fill="none" />
-                  <path d="M60 55 Q55 45 50 35" stroke="#C4956A" strokeWidth="2" strokeLinecap="round" fill="none" />
-                  {/* Leaves on branch */}
-                  <path d="M45 38 Q50 30 55 38 Q50 34 45 38Z" fill="#5B8C6F" opacity="0.6" />
-                  <path d="M48 32 Q53 24 58 32 Q53 28 48 32Z" fill="#5B8C6F" opacity="0.4" />
-                  {/* Owl 1 - big */}
-                  <ellipse cx="40" cy="46" rx="12" ry="12" fill="#D97757" />
-                  <ellipse cx="40" cy="50" rx="8" ry="8" fill="#F0B8A0" />
-                  <circle cx="36" cy="43" r="4.5" fill="white" />
-                  <circle cx="44" cy="43" r="4.5" fill="white" />
-                  <circle cx="37" cy="43" r="2.2" fill="#2D2B2A" />
-                  <circle cx="45" cy="43" r="2.2" fill="#2D2B2A" />
-                  <path d="M38 47 L40 50 L42 47Z" fill="#C4956A" />
-                  <path d="M30 36 L33 30 L37 37" fill="#C4623F" />
-                  <path d="M43 37 L47 30 L50 36" fill="#C4623F" />
-                  {/* Owl 2 - small */}
-                  <ellipse cx="75" cy="48" rx="9" ry="9" fill="#D97757" />
-                  <ellipse cx="75" cy="51" rx="6" ry="6" fill="#F0B8A0" />
-                  <circle cx="72" cy="46" r="3.5" fill="white" />
-                  <circle cx="78" cy="46" r="3.5" fill="white" />
-                  <circle cx="73" cy="46" r="1.8" fill="#2D2B2A" />
-                  <circle cx="79" cy="46" r="1.8" fill="#2D2B2A" />
-                  <path d="M74 49 L75 51 L76 49Z" fill="#C4956A" />
-                  <path d="M67 40 L69 36 L72 41" fill="#C4623F" />
-                  <path d="M78 41 L81 36 L83 40" fill="#C4623F" />
-                  {/* Owl 3 - tiny, sleeping */}
-                  <ellipse cx="105" cy="49" rx="7" ry="7" fill="#D97757" />
-                  <ellipse cx="105" cy="51" rx="5" ry="5" fill="#F0B8A0" />
-                  <path d="M101 47 Q103 49 105 47" stroke="#2D2B2A" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-                  <path d="M105 47 Q107 49 109 47" stroke="#2D2B2A" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-                  <path d="M104 50 L105 51.5 L106 50Z" fill="#C4956A" />
-                  <path d="M99 42 L101 39 L103 43" fill="#C4623F" />
-                  <path d="M107 43 L109 39 L111 42" fill="#C4623F" />
-                  {/* Zzz */}
-                  <text x="112" y="40" fontSize="8" fill="#8A8480" opacity="0.6">z</text>
-                  <text x="117" y="35" fontSize="6" fill="#8A8480" opacity="0.4">z</text>
-                </svg>
-              </div>
-            )}
           </div>
         )}
 

@@ -30,9 +30,9 @@ export default function Home() {
   }, [query]);
 
   return (
-    <main className="min-h-screen bg-bg pb-8">
-      {/* Dark header: mascot + search */}
-      <div className="bg-[#2D2B2A] rounded-b-3xl px-4 pb-5 relative overflow-hidden">
+    <main className="min-h-screen bg-bg pb-16">
+      {/* Hero section: mascot + tagline + search */}
+      <div className="bg-[#2D2B2A] rounded-b-[2rem] px-4 pb-10 relative overflow-hidden">
         {/* Forest background illustration */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 520 280" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
           {/* Moon - yellow, left side */}
@@ -93,17 +93,21 @@ export default function Home() {
           </div>
           <HandMascot state="idle" />
 
+          {/* Hero tagline */}
+          <p className="hero-tagline text-center mb-6">수어를 배워보세요</p>
+          <p className="text-center text-sm text-[#A69E94] -mt-4 mb-8 tracking-wide">한국수어를 쉽고 재미있게</p>
+
           {/* Search - white box */}
           <div className="relative">
-            <div className="flex items-center bg-white rounded-xl px-4 py-3 shadow-sm">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#A69E94" className="flex-shrink-0 mr-3">
+            <div className="flex items-center bg-white rounded-2xl px-5 py-4 shadow-sm search-focus-effect">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#A69E94" className="flex-shrink-0 mr-3">
                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
               </svg>
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={totalCount > 0 ? `${totalCount.toLocaleString()}개 수어 단어 검색...` : "수어 단어 검색..."}
-                className="flex-1 bg-transparent text-text-main placeholder-text-light text-sm outline-none"
+                className="flex-1 bg-transparent text-text-main placeholder-text-light text-base outline-none"
               />
               {query && (
                 <button onClick={() => setQuery("")} className="ml-2 text-text-light hover:text-text-sub">
@@ -116,7 +120,7 @@ export default function Home() {
 
             {/* Search results dropdown */}
             {searchResults.length > 0 && (
-              <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-card border border-card-border rounded-xl card-shadow overflow-hidden max-h-64 overflow-y-auto">
+              <div className="absolute z-10 top-full left-0 right-0 mt-2 bg-card border border-card-border rounded-2xl card-shadow overflow-hidden max-h-64 overflow-y-auto">
                 {searchResults.map((word) => (
                   <Link
                     key={word.title}
@@ -133,93 +137,109 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="max-w-app mx-auto px-4">
-        {/* My wordbook link - accent color */}
-        <Link href="/my-words" className="block mt-5 mb-5">
-          <div className="bg-accent/10 border-2 border-accent/30 rounded-card px-4 py-3.5 flex items-center justify-between hover:bg-accent/15 transition-colors">
-            <div className="flex items-center gap-2.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#D97757">
-                <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
-              </svg>
-              <span className="text-sm font-bold text-accent">내 단어장</span>
+      <div className="max-w-app mx-auto px-5">
+        {/* SECTION: My Wordbook */}
+        <div className="pt-10 pb-2">
+          <span className="section-label">나의 학습</span>
+        </div>
+        <Link href="/my-words" className="block mb-2">
+          <div className="bg-card border border-card-border rounded-2xl px-5 py-5 flex items-center justify-between card-lift card-shadow hover:border-accent/40">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#D97757">
+                  <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
+                </svg>
+              </div>
+              <div>
+                <span className="text-base font-bold text-text-main block">내 단어장</span>
+                <span className="text-xs text-text-light">저장한 단어 모아보기</span>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs text-accent font-medium">{allWords.length}개</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="#D97757">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-accent font-bold">{allWords.length}개</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#D97757">
                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
               </svg>
             </div>
           </div>
         </Link>
 
-        {/* Categories - 3 col grid */}
+        {/* SECTION: Categories - 2 col grid with tall cards */}
         {categories.length > 0 && (
-          <div className="grid grid-cols-3 gap-2.5">
-            {categories.map(({ name }) => (
-              <Link key={name} href={`/category/${encodeURIComponent(name)}`}>
-                <div className="bg-card border border-card-border rounded-card p-3.5 card-shadow text-center hover:border-accent/40 transition-all active:scale-[0.97]">
-                  <span className="text-2xl block mb-1">{getEmoji(name)}</span>
-                  <span className="text-sm font-bold text-text-main block">{name}</span>
+          <div className="pt-10 pb-2">
+            <span className="section-label">카테고리</span>
+            <div className="grid grid-cols-2 gap-3 mt-4">
+              {categories.map(({ name }, index) => (
+                <Link key={name} href={`/category/${encodeURIComponent(name)}`}>
+                  <div
+                    className="card-enter bg-card border border-card-border rounded-2xl p-5 card-shadow card-lift relative overflow-hidden group"
+                    style={{ animationDelay: `${index * 0.04}s` }}
+                  >
+                    {/* Accent top border */}
+                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-accent/30 group-hover:bg-accent/60 transition-colors" />
+                    <span className="text-4xl block mb-3">{getEmoji(name)}</span>
+                    <span className="text-[15px] font-bold text-text-main block leading-tight">{name}</span>
+                  </div>
+                </Link>
+              ))}
+              {/* Fill remaining grid cells with owls on branch */}
+              {categories.length % 2 !== 0 && (
+                <div className="rounded-2xl p-4 flex items-end justify-center">
+                  <svg viewBox="0 0 140 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+                    {/* Branch */}
+                    <path d="M0 60 Q40 50 70 55 Q100 60 140 52" stroke="#C4956A" strokeWidth="4" strokeLinecap="round" fill="none" />
+                    <path d="M60 55 Q55 45 50 35" stroke="#C4956A" strokeWidth="2" strokeLinecap="round" fill="none" />
+                    {/* Leaves on branch */}
+                    <path d="M45 38 Q50 30 55 38 Q50 34 45 38Z" fill="#5B8C6F" opacity="0.6" />
+                    <path d="M48 32 Q53 24 58 32 Q53 28 48 32Z" fill="#5B8C6F" opacity="0.4" />
+                    {/* Owl 1 - big */}
+                    <ellipse cx="40" cy="46" rx="12" ry="12" fill="#D97757" />
+                    <ellipse cx="40" cy="50" rx="8" ry="8" fill="#F0B8A0" />
+                    <circle cx="36" cy="43" r="4.5" fill="white" />
+                    <circle cx="44" cy="43" r="4.5" fill="white" />
+                    <circle cx="37" cy="43" r="2.2" fill="#2D2B2A" />
+                    <circle cx="45" cy="43" r="2.2" fill="#2D2B2A" />
+                    <path d="M38 47 L40 50 L42 47Z" fill="#C4956A" />
+                    <path d="M30 36 L33 30 L37 37" fill="#C4623F" />
+                    <path d="M43 37 L47 30 L50 36" fill="#C4623F" />
+                    {/* Owl 2 - small */}
+                    <ellipse cx="75" cy="48" rx="9" ry="9" fill="#D97757" />
+                    <ellipse cx="75" cy="51" rx="6" ry="6" fill="#F0B8A0" />
+                    <circle cx="72" cy="46" r="3.5" fill="white" />
+                    <circle cx="78" cy="46" r="3.5" fill="white" />
+                    <circle cx="73" cy="46" r="1.8" fill="#2D2B2A" />
+                    <circle cx="79" cy="46" r="1.8" fill="#2D2B2A" />
+                    <path d="M74 49 L75 51 L76 49Z" fill="#C4956A" />
+                    <path d="M67 40 L69 36 L72 41" fill="#C4623F" />
+                    <path d="M78 41 L81 36 L83 40" fill="#C4623F" />
+                    {/* Owl 3 - tiny, sleeping */}
+                    <ellipse cx="105" cy="49" rx="7" ry="7" fill="#D97757" />
+                    <ellipse cx="105" cy="51" rx="5" ry="5" fill="#F0B8A0" />
+                    <path d="M101 47 Q103 49 105 47" stroke="#2D2B2A" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+                    <path d="M105 47 Q107 49 109 47" stroke="#2D2B2A" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+                    <path d="M104 50 L105 51.5 L106 50Z" fill="#C4956A" />
+                    <path d="M99 42 L101 39 L103 43" fill="#C4623F" />
+                    <path d="M107 43 L109 39 L111 42" fill="#C4623F" />
+                    {/* Zzz */}
+                    <text x="112" y="40" fontSize="8" fill="#8A8480" opacity="0.6">z</text>
+                    <text x="117" y="35" fontSize="6" fill="#8A8480" opacity="0.4">z</text>
+                  </svg>
                 </div>
-              </Link>
-            ))}
-            {/* Fill remaining grid cells with owls on branch */}
-            {categories.length % 3 !== 0 && (
-              <div className={`rounded-card p-2 flex items-end justify-center ${categories.length % 3 === 1 ? "col-span-2" : ""}`}>
-                <svg viewBox="0 0 140 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-                  {/* Branch */}
-                  <path d="M0 60 Q40 50 70 55 Q100 60 140 52" stroke="#C4956A" strokeWidth="4" strokeLinecap="round" fill="none" />
-                  <path d="M60 55 Q55 45 50 35" stroke="#C4956A" strokeWidth="2" strokeLinecap="round" fill="none" />
-                  {/* Leaves on branch */}
-                  <path d="M45 38 Q50 30 55 38 Q50 34 45 38Z" fill="#5B8C6F" opacity="0.6" />
-                  <path d="M48 32 Q53 24 58 32 Q53 28 48 32Z" fill="#5B8C6F" opacity="0.4" />
-                  {/* Owl 1 - big */}
-                  <ellipse cx="40" cy="46" rx="12" ry="12" fill="#D97757" />
-                  <ellipse cx="40" cy="50" rx="8" ry="8" fill="#F0B8A0" />
-                  <circle cx="36" cy="43" r="4.5" fill="white" />
-                  <circle cx="44" cy="43" r="4.5" fill="white" />
-                  <circle cx="37" cy="43" r="2.2" fill="#2D2B2A" />
-                  <circle cx="45" cy="43" r="2.2" fill="#2D2B2A" />
-                  <path d="M38 47 L40 50 L42 47Z" fill="#C4956A" />
-                  <path d="M30 36 L33 30 L37 37" fill="#C4623F" />
-                  <path d="M43 37 L47 30 L50 36" fill="#C4623F" />
-                  {/* Owl 2 - small */}
-                  <ellipse cx="75" cy="48" rx="9" ry="9" fill="#D97757" />
-                  <ellipse cx="75" cy="51" rx="6" ry="6" fill="#F0B8A0" />
-                  <circle cx="72" cy="46" r="3.5" fill="white" />
-                  <circle cx="78" cy="46" r="3.5" fill="white" />
-                  <circle cx="73" cy="46" r="1.8" fill="#2D2B2A" />
-                  <circle cx="79" cy="46" r="1.8" fill="#2D2B2A" />
-                  <path d="M74 49 L75 51 L76 49Z" fill="#C4956A" />
-                  <path d="M67 40 L69 36 L72 41" fill="#C4623F" />
-                  <path d="M78 41 L81 36 L83 40" fill="#C4623F" />
-                  {/* Owl 3 - tiny, sleeping */}
-                  <ellipse cx="105" cy="49" rx="7" ry="7" fill="#D97757" />
-                  <ellipse cx="105" cy="51" rx="5" ry="5" fill="#F0B8A0" />
-                  <path d="M101 47 Q103 49 105 47" stroke="#2D2B2A" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-                  <path d="M105 47 Q107 49 109 47" stroke="#2D2B2A" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-                  <path d="M104 50 L105 51.5 L106 50Z" fill="#C4956A" />
-                  <path d="M99 42 L101 39 L103 43" fill="#C4623F" />
-                  <path d="M107 43 L109 39 L111 42" fill="#C4623F" />
-                  {/* Zzz */}
-                  <text x="112" y="40" fontSize="8" fill="#8A8480" opacity="0.6">z</text>
-                  <text x="117" y="35" fontSize="6" fill="#8A8480" opacity="0.4">z</text>
-                </svg>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         )}
 
         {/* Empty state */}
         {totalCount === 0 && (
-          <div className="text-center py-12">
-            <p className="text-sm text-text-sub mb-2">수어 데이터가 아직 없습니다</p>
-            <p className="text-xs text-text-light">스크립트를 실행하여 데이터를 다운로드하세요</p>
+          <div className="text-center py-16">
+            <p className="text-base text-text-sub mb-2 font-medium">수어 데이터가 아직 없습니다</p>
+            <p className="text-sm text-text-light">스크립트를 실행하여 데이터를 다운로드하세요</p>
           </div>
         )}
 
-        {/* Footer */}
-        <footer className="mt-8 text-center pb-4 space-y-1.5">
+        {/* Footer - minimal, generous top spacing */}
+        <footer className="mt-16 text-center pb-6 space-y-2 border-t border-card-border pt-8">
           <p className="text-xs text-text-light">
             수어 데이터 출처:{" "}
             <a href="https://sldict.korean.go.kr/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
@@ -227,7 +247,7 @@ export default function Home() {
             </a>
           </p>
           <p className="text-[10px] text-text-light">
-            © 2026 수엉이. 비상업적 용도로만 사용 가능합니다.
+            &copy; 2026 수엉이. 비상업적 용도로만 사용 가능합니다.
           </p>
         </footer>
       </div>

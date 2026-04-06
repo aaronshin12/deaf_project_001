@@ -30,7 +30,7 @@ export default function Home() {
   }, [query]);
 
   return (
-    <main className="min-h-screen bg-bg pb-8">
+    <main className="min-h-screen bg-bg flex flex-col">
       {/* Dark header: mascot + search */}
       <div className="bg-[#2D2B2A] px-4 pb-5 relative overflow-visible" style={{ zIndex: 20 }}>
         {/* Forest background illustration */}
@@ -137,7 +137,7 @@ export default function Home() {
         <path d="M0 0 L0 40 Q360 80 720 40 Q1080 0 1440 40 L1440 0 Z" fill="#2D2B2A" />
       </svg>
 
-      <div className="max-w-app mx-auto px-4 mt-6">
+      <div className="max-w-app mx-auto px-4 mt-8 mb-8">
         {/* Categories - emoji + title, no box around icon */}
         {categories.length > 0 && (
           <div className="grid grid-cols-4 gap-x-3 gap-y-7">
@@ -156,10 +156,10 @@ export default function Home() {
       <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full -mb-1" preserveAspectRatio="none" style={{ display: 'block' }}>
         <path d="M0 80 L0 40 Q360 0 720 40 Q1080 80 1440 40 L1440 80 Z" fill="#2D2B2A" />
       </svg>
-      <div className="bg-[#2D2B2A] px-4 pb-8">
+      <div className="bg-[#2D2B2A] px-4 flex-1">
         <div className="max-w-app mx-auto">
           {/* Wordbook + Recently viewed — yellow, no box */}
-          <div className="flex justify-center gap-8 pt-2 pb-6">
+          <div className="flex justify-center gap-8 pt-8 pb-8">
             <Link href="/my-words" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="#F5D87A" className="flex-shrink-0">
                 <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
@@ -183,7 +183,7 @@ export default function Home() {
               </a>
             </p>
             <p className="text-[10px] text-[#6A6460]">
-              © 2026 수엉이. 비상업적 용도로만 사용 가능합니다.
+              © 2026 수엉이. <span className="text-accent">비상업적 용도로만 사용 가능합니다.</span>
             </p>
           </footer>
         </div>

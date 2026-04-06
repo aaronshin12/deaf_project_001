@@ -32,8 +32,36 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-bg pb-8">
       {/* Dark header: mascot + search */}
-      <div className="bg-[#2D2B2A] rounded-b-3xl px-4 pb-5">
-        <div className="max-w-app mx-auto">
+      <div className="bg-[#2D2B2A] rounded-b-3xl px-4 pb-5 relative overflow-hidden">
+        {/* Forest background illustration */}
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 520 280" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          {/* Moon */}
+          <circle cx="440" cy="45" r="22" fill="#3D3B3A" />
+          <circle cx="446" cy="40" r="18" fill="#2D2B2A" />
+          {/* Stars */}
+          <circle cx="80" cy="30" r="1.5" fill="#4D4B4A" />
+          <circle cx="200" cy="20" r="1" fill="#4D4B4A" />
+          <circle cx="350" cy="35" r="1.5" fill="#4D4B4A" />
+          <circle cx="150" cy="50" r="1" fill="#4D4B4A" />
+          <circle cx="480" cy="60" r="1" fill="#4D4B4A" />
+          {/* Far trees */}
+          <path d="M-10 280 L30 120 L70 280Z" fill="#333130" />
+          <path d="M50 280 L90 140 L130 280Z" fill="#302E2D" />
+          <path d="M380 280 L420 130 L460 280Z" fill="#333130" />
+          <path d="M440 280 L475 150 L510 280Z" fill="#302E2D" />
+          {/* Near trees */}
+          <path d="M-20 280 L15 160 L50 280Z" fill="#383635" />
+          <path d="M460 280 L495 155 L530 280Z" fill="#383635" />
+          {/* Ground bushes */}
+          <ellipse cx="60" cy="270" rx="40" ry="15" fill="#353332" />
+          <ellipse cx="460" cy="265" rx="35" ry="12" fill="#353332" />
+          {/* Leaves scattered */}
+          <path d="M100 240 Q108 230 116 240 Q108 235 100 240Z" fill="#3A3837" />
+          <path d="M400 250 Q408 240 416 250 Q408 245 400 250Z" fill="#3A3837" />
+          <path d="M70 220 Q76 212 82 220 Q76 216 70 220Z" fill="#383635" />
+          <path d="M440 230 Q446 222 452 230 Q446 226 440 230Z" fill="#383635" />
+        </svg>
+        <div className="max-w-app mx-auto relative z-10">
           {/* Share button - subtle, top right */}
           <div className="flex justify-end pt-3">
             <button

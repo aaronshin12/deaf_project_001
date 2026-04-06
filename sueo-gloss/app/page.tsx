@@ -150,46 +150,43 @@ export default function Home() {
           </div>
         )}
 
-        {/* Wordbook + Recently viewed — below categories */}
-        <div className="grid grid-cols-2 gap-2.5 mt-6 mb-5">
-          <Link href="/my-words">
-            <div className="bg-accent/10 border-2 border-accent/30 rounded-xl px-3 py-2.5 hover:bg-accent/15 transition-colors flex items-center gap-2.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#D97757" className="flex-shrink-0">
+      </div>
+
+      {/* Bottom wave + dark section */}
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full -mb-1" preserveAspectRatio="none" style={{ display: 'block' }}>
+        <path d="M0 80 L0 40 Q360 0 720 40 Q1080 80 1440 40 L1440 80 Z" fill="#2D2B2A" />
+      </svg>
+      <div className="bg-[#2D2B2A] px-4 pb-8">
+        <div className="max-w-app mx-auto">
+          {/* Wordbook + Recently viewed — yellow, no box */}
+          <div className="flex justify-center gap-8 pt-2 pb-6">
+            <Link href="/my-words" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#F5D87A" className="flex-shrink-0">
                 <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
               </svg>
-              <span className="text-sm font-bold text-accent">내 단어장</span>
-            </div>
-          </Link>
-          <Link href="/recent">
-            <div className="bg-card border border-card-border rounded-xl px-3 py-2.5 card-shadow hover:border-accent/30 transition-colors flex items-center gap-2.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#7A7168" className="flex-shrink-0">
+              <span className="text-sm font-bold text-[#F5D87A]">내 단어장</span>
+            </Link>
+            <Link href="/recent" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#F5D87A" className="flex-shrink-0">
                 <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" />
               </svg>
-              <span className="text-sm font-bold text-text-main">최근 본 단어</span>
-            </div>
-          </Link>
-        </div>
-
-        {/* Empty state */}
-        {totalCount === 0 && (
-          <div className="text-center py-12">
-            <p className="text-sm text-text-sub mb-2">수어 데이터가 아직 없습니다</p>
-            <p className="text-xs text-text-light">스크립트를 실행하여 데이터를 다운로드하세요</p>
+              <span className="text-sm font-bold text-[#F5D87A]">최근 본 단어</span>
+            </Link>
           </div>
-        )}
 
-        {/* Footer */}
-        <footer className="mt-8 text-center pb-4 space-y-1.5">
-          <p className="text-xs text-text-light">
-            수어 데이터 출처:{" "}
-            <a href="https://sldict.korean.go.kr/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-              국립국어원 한국수어사전
-            </a>
-          </p>
-          <p className="text-[10px] text-text-light">
-            © 2026 수엉이. 비상업적 용도로만 사용 가능합니다.
-          </p>
-        </footer>
+          {/* Footer */}
+          <footer className="text-center pb-2 space-y-1.5">
+            <p className="text-xs text-[#8A8480]">
+              수어 데이터 출처:{" "}
+              <a href="https://sldict.korean.go.kr/" target="_blank" rel="noopener noreferrer" className="text-[#A69E94] hover:underline">
+                국립국어원 한국수어사전
+              </a>
+            </p>
+            <p className="text-[10px] text-[#6A6460]">
+              © 2026 수엉이. 비상업적 용도로만 사용 가능합니다.
+            </p>
+          </footer>
+        </div>
       </div>
     </main>
   );

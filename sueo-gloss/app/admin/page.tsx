@@ -31,9 +31,28 @@ export default function AdminPage() {
   const [newWeekDesc, setNewWeekDesc] = useState("");
   const [newWords, setNewWords] = useState("");
 
-  const handleLogin = () => {
-    setAuthenticated(true);
-    loadCurriculum();
+  const handleLogin = async () => {
+    if (!password.trim()) {
+      setMessage({ type: "error", text: "비밀번호를 입력하세요." });
+      return;
+    }
+    try {
+      const res = await fetch("/api/admin/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      const data = await res.json();
+      if (data.valid) {
+        setAuthenticated(true);
+        setMessage(null);
+        loadCurriculum();
+      } else {
+        setMessage({ type: "error", text: data.error || "비밀번호가 올바르지 않습니다." });
+      }
+    } catch {
+      setMessage({ type: "error", text: "서버 연결에 실패했습니다." });
+    }
   };
 
   const loadCurriculum = async () => {
@@ -137,8 +156,11 @@ export default function AdminPage() {
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleLogin()}
               placeholder="비밀번호"
-              className="w-full bg-bg border border-card-border rounded-xl p-3 text-text-main placeholder-text-light outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all mb-4"
+              className="w-full bg-bg border border-card-border rounded-xl p-3 text-text-main placeholder-text-light outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all mb-3"
             />
+            {message && message.type === "error" && (
+              <p className="text-sm text-red text-center mb-3">{message.text}</p>
+            )}
             <button
               onClick={handleLogin}
               className="w-full btn-soft bg-accent text-white font-semibold py-3 rounded-xl shadow-[0_3px_0_#C4623F] hover:brightness-105 transition-all"

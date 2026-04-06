@@ -30,12 +30,6 @@ const config: Config = {
           'Roboto',
           'sans-serif',
         ],
-        serif: [
-          '"Noto Serif KR"',
-          'Georgia',
-          '"Times New Roman"',
-          'serif',
-        ],
       },
       maxWidth: {
         app: "520px",

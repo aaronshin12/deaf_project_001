@@ -16,10 +16,10 @@ export default function CategoryPage() {
   return (
     <main className="min-h-screen bg-bg pb-8">
       <div className="max-w-app mx-auto px-4">
-        <TopNav showBack />
+        <TopNav />
 
         <div className="mt-2 mb-5">
-          <h1 className="text-xl font-serif font-bold text-text-main tracking-tight">{category}</h1>
+          <h1 className="text-xl font-bold text-text-main tracking-tight">{category}</h1>
           <p className="text-sm text-text-sub mt-1">{words.length}개 단어</p>
         </div>
 
@@ -41,7 +41,7 @@ export default function CategoryPage() {
                 )}
               </button>
               <Link href={`/word/${encodeURIComponent(word.title)}`} className="flex-1 min-w-0">
-                <span className="text-base font-serif font-bold text-text-main">{word.title}</span>
+                <span className="text-base font-bold text-text-main">{word.title}</span>
               </Link>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="#A69E94" className="flex-shrink-0">
                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />

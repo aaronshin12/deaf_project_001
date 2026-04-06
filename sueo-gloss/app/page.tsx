@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-bg pb-8">
       {/* Dark header: mascot + search */}
-      <div className="bg-[#2D2B2A] rounded-b-3xl px-4 pb-5 relative overflow-hidden">
+      <div className="bg-[#2D2B2A] rounded-b-3xl px-4 pb-5 relative overflow-visible" style={{ zIndex: 20 }}>
         {/* Forest background illustration */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 520 280" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
           {/* Moon - yellow, left side */}
@@ -116,7 +116,7 @@ export default function Home() {
 
             {/* Search results dropdown */}
             {searchResults.length > 0 && (
-              <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-card border border-card-border rounded-xl card-shadow overflow-hidden max-h-64 overflow-y-auto">
+              <div className="absolute z-50 top-full left-0 right-0 mt-1 bg-card border border-card-border rounded-xl shadow-lg overflow-hidden max-h-64 overflow-y-auto">
                 {searchResults.map((word) => (
                   <Link
                     key={word.title}

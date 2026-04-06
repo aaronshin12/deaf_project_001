@@ -7,7 +7,7 @@ import { useWordBook } from "@/lib/useUserData";
 import { searchWords } from "@/lib/signData";
 
 export default function MyWordsPage() {
-  const { allWords, customWords, removeWord, addWord, addCustomWord, removeCustomWord } = useWordBook();
+  const { allWords, customWords, removeWord, addWord, removeCustomWord } = useWordBook();
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<{ title: string }[]>([]);
 
@@ -26,14 +26,6 @@ export default function MyWordsPage() {
     addWord(word);
     setQuery("");
     setSearchResults([]);
-  };
-
-  const handleAddCustom = () => {
-    if (query.trim()) {
-      addCustomWord(query.trim());
-      setQuery("");
-      setSearchResults([]);
-    }
   };
 
   return (
@@ -57,7 +49,6 @@ export default function MyWordsPage() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleAddCustom()}
               placeholder="단어 검색하여 추가..."
               className="flex-1 bg-transparent text-text-main placeholder-text-light text-sm outline-none"
             />

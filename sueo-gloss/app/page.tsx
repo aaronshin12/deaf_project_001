@@ -35,31 +35,41 @@ export default function Home() {
       <div className="bg-[#2D2B2A] rounded-b-3xl px-4 pb-5 relative overflow-hidden">
         {/* Forest background illustration */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 520 280" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          {/* Moon */}
-          <circle cx="440" cy="45" r="22" fill="#3D3B3A" />
-          <circle cx="446" cy="40" r="18" fill="#2D2B2A" />
-          {/* Stars */}
-          <circle cx="80" cy="30" r="1.5" fill="#4D4B4A" />
-          <circle cx="200" cy="20" r="1" fill="#4D4B4A" />
-          <circle cx="350" cy="35" r="1.5" fill="#4D4B4A" />
-          <circle cx="150" cy="50" r="1" fill="#4D4B4A" />
-          <circle cx="480" cy="60" r="1" fill="#4D4B4A" />
-          {/* Far trees */}
-          <path d="M-10 280 L30 120 L70 280Z" fill="#333130" />
-          <path d="M50 280 L90 140 L130 280Z" fill="#302E2D" />
-          <path d="M380 280 L420 130 L460 280Z" fill="#333130" />
-          <path d="M440 280 L475 150 L510 280Z" fill="#302E2D" />
-          {/* Near trees */}
-          <path d="M-20 280 L15 160 L50 280Z" fill="#383635" />
-          <path d="M460 280 L495 155 L530 280Z" fill="#383635" />
+          {/* Moon - yellow, left side */}
+          <circle cx="100" cy="40" r="20" fill="#F5D87A" opacity="0.9" />
+          <circle cx="108" cy="35" r="16" fill="#2D2B2A" />
+          {/* Stars - scattered */}
+          <circle cx="50" cy="25" r="2" fill="#F5D87A" opacity="0.7" />
+          <circle cx="170" cy="18" r="1.5" fill="#F5D87A" opacity="0.5" />
+          <circle cx="250" cy="30" r="2" fill="#F5D87A" opacity="0.6" />
+          <circle cx="320" cy="15" r="1.5" fill="#F5D87A" opacity="0.4" />
+          <circle cx="400" cy="28" r="2" fill="#F5D87A" opacity="0.7" />
+          <circle cx="460" cy="45" r="1.5" fill="#F5D87A" opacity="0.5" />
+          <circle cx="30" cy="60" r="1" fill="#F5D87A" opacity="0.4" />
+          <circle cx="210" cy="50" r="1.5" fill="#F5D87A" opacity="0.5" />
+          <circle cx="490" cy="20" r="2" fill="#F5D87A" opacity="0.6" />
+          <circle cx="140" cy="55" r="1" fill="#F5D87A" opacity="0.3" />
+          <circle cx="370" cy="50" r="1.5" fill="#F5D87A" opacity="0.4" />
+          <circle cx="70" cy="45" r="1" fill="#F5D87A" opacity="0.5" />
+          {/* Far trees - more visible */}
+          <path d="M-10 280 L30 110 L70 280Z" fill="#3D3A38" />
+          <path d="M40 280 L80 130 L120 280Z" fill="#3A3836" />
+          <path d="M370 280 L410 120 L450 280Z" fill="#3D3A38" />
+          <path d="M430 280 L465 140 L500 280Z" fill="#3A3836" />
+          <path d="M200 280 L225 180 L250 280Z" fill="#363433" />
+          <path d="M280 280 L310 170 L340 280Z" fill="#343231" />
+          {/* Near trees - darker, closer */}
+          <path d="M-30 280 L10 150 L50 280Z" fill="#434140" />
+          <path d="M470 280 L505 145 L540 280Z" fill="#434140" />
           {/* Ground bushes */}
-          <ellipse cx="60" cy="270" rx="40" ry="15" fill="#353332" />
-          <ellipse cx="460" cy="265" rx="35" ry="12" fill="#353332" />
-          {/* Leaves scattered */}
-          <path d="M100 240 Q108 230 116 240 Q108 235 100 240Z" fill="#3A3837" />
-          <path d="M400 250 Q408 240 416 250 Q408 245 400 250Z" fill="#3A3837" />
-          <path d="M70 220 Q76 212 82 220 Q76 216 70 220Z" fill="#383635" />
-          <path d="M440 230 Q446 222 452 230 Q446 226 440 230Z" fill="#383635" />
+          <ellipse cx="50" cy="268" rx="45" ry="18" fill="#3F3D3B" />
+          <ellipse cx="470" cy="265" rx="40" ry="16" fill="#3F3D3B" />
+          <ellipse cx="260" cy="275" rx="50" ry="12" fill="#383635" />
+          {/* Leaves */}
+          <path d="M95 235 Q105 220 115 235 Q105 228 95 235Z" fill="#454240" />
+          <path d="M400 245 Q410 230 420 245 Q410 238 400 245Z" fill="#454240" />
+          <path d="M60 215 Q68 205 76 215 Q68 210 60 215Z" fill="#403E3C" />
+          <path d="M450 225 Q458 215 466 225 Q458 220 450 225Z" fill="#403E3C" />
         </svg>
         <div className="max-w-app mx-auto relative z-10">
           {/* Share button - subtle, top right */}
@@ -153,6 +163,50 @@ export default function Home() {
                 </div>
               </Link>
             ))}
+            {/* Fill remaining grid cells with owls on branch */}
+            {categories.length % 3 !== 0 && (
+              <div className={`rounded-card p-2 flex items-end justify-center ${categories.length % 3 === 1 ? "col-span-2" : ""}`}>
+                <svg viewBox="0 0 140 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+                  {/* Branch */}
+                  <path d="M0 60 Q40 50 70 55 Q100 60 140 52" stroke="#C4956A" strokeWidth="4" strokeLinecap="round" fill="none" />
+                  <path d="M60 55 Q55 45 50 35" stroke="#C4956A" strokeWidth="2" strokeLinecap="round" fill="none" />
+                  {/* Leaves on branch */}
+                  <path d="M45 38 Q50 30 55 38 Q50 34 45 38Z" fill="#5B8C6F" opacity="0.6" />
+                  <path d="M48 32 Q53 24 58 32 Q53 28 48 32Z" fill="#5B8C6F" opacity="0.4" />
+                  {/* Owl 1 - big */}
+                  <ellipse cx="40" cy="46" rx="12" ry="12" fill="#D97757" />
+                  <ellipse cx="40" cy="50" rx="8" ry="8" fill="#F0B8A0" />
+                  <circle cx="36" cy="43" r="4.5" fill="white" />
+                  <circle cx="44" cy="43" r="4.5" fill="white" />
+                  <circle cx="37" cy="43" r="2.2" fill="#2D2B2A" />
+                  <circle cx="45" cy="43" r="2.2" fill="#2D2B2A" />
+                  <path d="M38 47 L40 50 L42 47Z" fill="#C4956A" />
+                  <path d="M30 36 L33 30 L37 37" fill="#C4623F" />
+                  <path d="M43 37 L47 30 L50 36" fill="#C4623F" />
+                  {/* Owl 2 - small */}
+                  <ellipse cx="75" cy="48" rx="9" ry="9" fill="#D97757" />
+                  <ellipse cx="75" cy="51" rx="6" ry="6" fill="#F0B8A0" />
+                  <circle cx="72" cy="46" r="3.5" fill="white" />
+                  <circle cx="78" cy="46" r="3.5" fill="white" />
+                  <circle cx="73" cy="46" r="1.8" fill="#2D2B2A" />
+                  <circle cx="79" cy="46" r="1.8" fill="#2D2B2A" />
+                  <path d="M74 49 L75 51 L76 49Z" fill="#C4956A" />
+                  <path d="M67 40 L69 36 L72 41" fill="#C4623F" />
+                  <path d="M78 41 L81 36 L83 40" fill="#C4623F" />
+                  {/* Owl 3 - tiny, sleeping */}
+                  <ellipse cx="105" cy="49" rx="7" ry="7" fill="#D97757" />
+                  <ellipse cx="105" cy="51" rx="5" ry="5" fill="#F0B8A0" />
+                  <path d="M101 47 Q103 49 105 47" stroke="#2D2B2A" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+                  <path d="M105 47 Q107 49 109 47" stroke="#2D2B2A" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+                  <path d="M104 50 L105 51.5 L106 50Z" fill="#C4956A" />
+                  <path d="M99 42 L101 39 L103 43" fill="#C4623F" />
+                  <path d="M107 43 L109 39 L111 42" fill="#C4623F" />
+                  {/* Zzz */}
+                  <text x="112" y="40" fontSize="8" fill="#8A8480" opacity="0.6">z</text>
+                  <text x="117" y="35" fontSize="6" fill="#8A8480" opacity="0.4">z</text>
+                </svg>
+              </div>
+            )}
           </div>
         )}
 

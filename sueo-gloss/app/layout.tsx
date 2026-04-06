@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "수어학습 도우미",
+  title: "수엉이",
   icons: {
     icon: "/icon.svg",
     apple: "/icon.svg",

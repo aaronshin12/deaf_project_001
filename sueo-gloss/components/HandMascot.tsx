@@ -16,14 +16,24 @@ export default function HandMascot({ state }: HandMascotProps) {
     setTimeout(() => setTapped(false), 800);
   };
 
-  // Easter egg: different reactions based on tap count
   const isWink = tapped && tapCount % 4 === 1;
   const isDizzy = tapped && tapCount % 4 === 2;
   const isHeart = tapped && tapCount % 4 === 3;
   const isJump = tapped && tapCount % 4 === 0;
 
   return (
-    <div className="flex justify-center py-5 select-none">
+    <div className="flex justify-center items-center gap-3 py-5 select-none">
+      {/* Speech bubble - appears on tap, left side */}
+      <div className="w-20 flex justify-end">
+        {tapped && (
+          <div className="relative bg-white rounded-2xl px-3 py-1.5 shadow-sm animate-fade-in">
+            <div className="absolute top-1/2 -right-[6px] -translate-y-1/2 w-2.5 h-2.5 bg-white rotate-45" />
+            <p className="text-sm font-bold text-accent whitespace-nowrap">수엉수엉</p>
+          </div>
+        )}
+      </div>
+
+      {/* Owl */}
       <div
         onClick={handleTap}
         className="cursor-pointer"
@@ -56,7 +66,7 @@ export default function HandMascot({ state }: HandMascotProps) {
           {/* Right eye white */}
           <circle cx="45" cy="34" r="10" fill="white" />
 
-          {/* Pupils - wink: left eye closed */}
+          {/* Pupils */}
           {isWink ? (
             <>
               <path d="M22 34 Q27 38 32 34" stroke="#2D2B2A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
@@ -64,7 +74,6 @@ export default function HandMascot({ state }: HandMascotProps) {
             </>
           ) : isDizzy ? (
             <>
-              {/* Spinning eyes */}
               <path d="M24 31 L30 37 M30 31 L24 37" stroke="#2D2B2A" strokeWidth="2" strokeLinecap="round" />
               <path d="M42 31 L48 37 M48 31 L42 37" stroke="#2D2B2A" strokeWidth="2" strokeLinecap="round" />
             </>
@@ -85,7 +94,7 @@ export default function HandMascot({ state }: HandMascotProps) {
             </>
           )}
 
-          {/* Eye shine (hidden during wink/dizzy) */}
+          {/* Eye shine */}
           {!isWink && !isDizzy && (
             <>
               <circle cx="26" cy="32" r="2" fill="white" />
@@ -100,8 +109,8 @@ export default function HandMascot({ state }: HandMascotProps) {
           <path
             d={
               isDizzy ? "M20 26 Q27 30 34 26" :
-              state === "error" ? "M18 27 Q27 31 34 27" :
               isHeart ? "M20 23 Q27 18 34 23" :
+              state === "error" ? "M18 27 Q27 31 34 27" :
               "M18 25 Q27 19 34 25"
             }
             stroke="#C4623F"
@@ -112,8 +121,8 @@ export default function HandMascot({ state }: HandMascotProps) {
           <path
             d={
               isDizzy ? "M38 26 Q45 30 52 26" :
-              state === "error" ? "M38 27 Q45 31 54 27" :
               isHeart ? "M38 23 Q45 18 52 23" :
+              state === "error" ? "M38 27 Q45 31 54 27" :
               "M38 25 Q45 19 54 25"
             }
             stroke="#C4623F"
@@ -122,11 +131,11 @@ export default function HandMascot({ state }: HandMascotProps) {
             fill="none"
           />
 
-          {/* Blush - bigger when tapped */}
+          {/* Blush */}
           <ellipse cx="20" cy="40" rx={tapped ? "5" : "4"} ry={tapped ? "3.5" : "2.5"} fill="#F0B8A0" opacity={tapped ? "0.8" : "0.5"} />
           <ellipse cx="52" cy="40" rx={tapped ? "5" : "4"} ry={tapped ? "3.5" : "2.5"} fill="#F0B8A0" opacity={tapped ? "0.8" : "0.5"} />
 
-          {/* Heart (easter egg) */}
+          {/* Heart */}
           {isHeart && (
             <text x="50" y="22" fontSize="14" className="animate-pulse">❤️</text>
           )}
@@ -136,6 +145,9 @@ export default function HandMascot({ state }: HandMascotProps) {
           <path d="M39 66 L43 72 M43 66 L47 72 M47 66 L51 72" stroke="#C4956A" strokeWidth="2" strokeLinecap="round" />
         </svg>
       </div>
+
+      {/* Right spacer for centering */}
+      <div className="w-20" />
     </div>
   );
 }

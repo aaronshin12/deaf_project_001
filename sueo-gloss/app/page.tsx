@@ -163,8 +163,6 @@ export default function Home() {
                 <span className="text-sm font-bold text-text-main text-center leading-tight">{name}</span>
               </Link>
             ))}
-              </Link>
-            ))}
           </div>
         )}
 

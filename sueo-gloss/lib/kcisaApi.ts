@@ -8,7 +8,7 @@ export interface SignEntry {
   signImages: string;
 }
 
-const API_BASE = "https://api.kcisa.kr/openapi/service/rest/meta13/getCTE01701";
+const API_BASE = "http://api.kcisa.kr/openapi/service/rest/meta13/getCTE01701";
 
 export async function searchSign(keyword: string): Promise<{ results: SignEntry[]; debug?: string }> {
   const serviceKey = process.env.KCISA_API_KEY;

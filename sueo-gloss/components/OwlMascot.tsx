@@ -51,7 +51,7 @@ export default function OwlMascot({ state }: OwlMascotProps) {
       {/* Speech bubble - right */}
       <div className="relative bg-card border border-card-border rounded-2xl px-4 py-2.5 card-shadow">
         <div className="absolute top-1/2 -left-[7px] -translate-y-1/2 w-3 h-3 bg-card border-l border-b border-card-border rotate-45" />
-        <p className="text-sm text-text-sub leading-relaxed">{messages[state]}</p>
+        <p className="text-[1.3rem] text-text-sub leading-relaxed" style={{ fontFamily: "'Gaegu', cursive" }}>{messages[state]}</p>
       </div>
     </div>
   );

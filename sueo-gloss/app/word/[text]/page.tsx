@@ -15,7 +15,7 @@ export default function WordPage() {
   const { isInWordBook, toggleWord } = useWordBook();
 
   const signData = useMemo(() => getWord(wordText), [wordText]);
-  const searchUrl = buildSearchUrl(wordText);
+  const iframeSrc = signData?.url || buildSearchUrl(wordText);
   const inWordBook = isInWordBook(wordText);
   const signImages = signData?.signImages
     ? signData.signImages.split(",").map((s) => s.trim()).filter(Boolean)
@@ -81,7 +81,7 @@ export default function WordPage() {
                 </svg>
                 새로고침
               </button>
-              <a href={searchUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-accent hover:underline">
+              <a href={iframeSrc} target="_blank" rel="noopener noreferrer" className="text-xs text-accent hover:underline">
                 새 탭
               </a>
             </div>
@@ -101,7 +101,7 @@ export default function WordPage() {
             )}
             <iframe
               key={iframeKey}
-              src={searchUrl}
+              src={iframeSrc}
               className="w-full h-full border-0"
               onLoad={() => setIframeLoaded(true)}
               sandbox="allow-scripts allow-same-origin allow-popups allow-forms"

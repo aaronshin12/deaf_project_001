@@ -56,10 +56,24 @@ export default function HandMascot({ state }: HandMascotProps) {
           xmlns="http://www.w3.org/2000/svg"
           className={state === "loading" ? "animate-bounce" : ""}
         >
+          {/* Left wing */}
+          <ellipse cx="6" cy="46" rx="10" ry="16" fill="#C4623F" transform="rotate(15 6 46)" />
+          <ellipse cx="7" cy="46" rx="7" ry="12" fill="#D97757" transform="rotate(15 7 46)" />
+          {/* Right wing */}
+          <ellipse cx="66" cy="46" rx="10" ry="16" fill="#C4623F" transform="rotate(-15 66 46)" />
+          <ellipse cx="65" cy="46" rx="7" ry="12" fill="#D97757" transform="rotate(-15 65 46)" />
+
           {/* Body */}
           <ellipse cx="36" cy="42" rx="26" ry="26" fill="#D97757" />
           {/* Belly */}
           <ellipse cx="36" cy="48" rx="17" ry="17" fill="#F0B8A0" />
+
+          {/* Left ear tuft */}
+          <path d="M16 18 L20 10 L26 20" fill="#C4623F" />
+          <path d="M18 18 L21 13 L25 20" fill="#D97757" />
+          {/* Right ear tuft */}
+          <path d="M46 20 L52 10 L56 18" fill="#C4623F" />
+          <path d="M47 20 L51 13 L54 18" fill="#D97757" />
 
           {/* Left eye white */}
           <circle cx="27" cy="34" r="10" fill="white" />

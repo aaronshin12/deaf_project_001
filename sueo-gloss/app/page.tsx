@@ -134,8 +134,20 @@ export default function Home() {
       </div>
 
       <div className="max-w-app mx-auto px-4">
-        {/* Wordbook + Recently viewed — compact side by side */}
-        <div className="grid grid-cols-2 gap-2.5 mt-5 mb-5">
+        {/* Categories - emoji + title, no box around icon */}
+        {categories.length > 0 && (
+          <div className="grid grid-cols-4 gap-x-3 gap-y-7">
+            {categories.map(({ name }) => (
+              <Link key={name} href={`/category/${encodeURIComponent(name)}`} className="flex flex-col items-center gap-1 hover:scale-105 active:scale-95 transition-transform">
+                <span className="text-2xl">{getEmoji(name)}</span>
+                <span className="text-sm font-bold text-text-main text-center leading-tight">{name}</span>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* Wordbook + Recently viewed — below categories */}
+        <div className="grid grid-cols-2 gap-2.5 mt-6 mb-5">
           <Link href="/my-words">
             <div className="bg-accent/10 border-2 border-accent/30 rounded-xl px-3 py-2.5 hover:bg-accent/15 transition-colors flex items-center gap-2.5">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="#D97757" className="flex-shrink-0">
@@ -153,18 +165,6 @@ export default function Home() {
             </div>
           </Link>
         </div>
-
-        {/* Categories - emoji + title, no box around icon */}
-        {categories.length > 0 && (
-          <div className="grid grid-cols-4 gap-x-3 gap-y-7">
-            {categories.map(({ name }) => (
-              <Link key={name} href={`/category/${encodeURIComponent(name)}`} className="flex flex-col items-center gap-1 hover:scale-105 active:scale-95 transition-transform">
-                <span className="text-2xl">{getEmoji(name)}</span>
-                <span className="text-sm font-bold text-text-main text-center leading-tight">{name}</span>
-              </Link>
-            ))}
-          </div>
-        )}
 
         {/* Empty state */}
         {totalCount === 0 && (

@@ -16,36 +16,51 @@ export async function searchSign(keyword: string): Promise<{ results: SignEntry[
     return { results: [], debug: "KCISA_API_KEY not set" };
   }
 
-  const url = `${API_BASE}?serviceKey=${encodeURIComponent(serviceKey)}&numOfRows=3&pageNo=1&keyword=${encodeURIComponent(keyword)}`;
+  // Build URL exactly like the Java sample - encode each param
+  const params = new URLSearchParams();
+  params.set("serviceKey", serviceKey);
+  params.set("numOfRows", "10");
+  params.set("pageNo", "1");
+  params.set("keyword", keyword);
+
+  const url = `${API_BASE}?${params.toString()}`;
 
   try {
-    // Try without Accept header - let API return its default format
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Accept": "application/json",
+      },
+    });
+
     const text = await res.text();
 
     if (!res.ok) {
       return { results: [], debug: `HTTP ${res.status}`, rawSample: text.substring(0, 500) };
     }
 
-    // Check if XML
+    // Check if XML response
     if (text.trimStart().startsWith("<?xml") || text.trimStart().startsWith("<")) {
-      // Parse XML manually - extract items
-      return { results: [], debug: "Response is XML", rawSample: text.substring(0, 800) };
+      return { results: [], debug: "XML response received despite JSON headers", rawSample: text.substring(0, 800) };
     }
 
-    // Try JSON
     let data;
     try {
       data = JSON.parse(text);
     } catch {
-      return { results: [], debug: "Not JSON or XML", rawSample: text.substring(0, 500) };
+      return { results: [], debug: "JSON parse failed", rawSample: text.substring(0, 500) };
     }
 
-    const body = data?.response?.body;
-    const items = body?.items?.item;
+    const items = data?.response?.body?.items?.item;
 
     if (!items) {
-      return { results: [], debug: `items is ${JSON.stringify(body?.items)}`, rawSample: text.substring(0, 500) };
+      // Show full body for debugging
+      return {
+        results: [],
+        debug: `items is ${String(data?.response?.body?.items)}, totalCount: ${data?.response?.body?.totalCount}`,
+        rawSample: text.substring(0, 600),
+      };
     }
 
     const arr = Array.isArray(items) ? items : [items];

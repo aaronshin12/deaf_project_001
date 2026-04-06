@@ -156,10 +156,10 @@ export default function Home() {
 
         {/* Categories - emoji + title, no box around icon */}
         {categories.length > 0 && (
-          <div className="grid grid-cols-3 gap-x-3 gap-y-5">
+          <div className="grid grid-cols-4 gap-x-3 gap-y-7">
             {categories.map(({ name }) => (
               <Link key={name} href={`/category/${encodeURIComponent(name)}`} className="flex flex-col items-center gap-1 hover:scale-105 active:scale-95 transition-transform">
-                <span className="text-3xl">{getEmoji(name)}</span>
+                <span className="text-2xl">{getEmoji(name)}</span>
                 <span className="text-sm font-bold text-text-main text-center leading-tight">{name}</span>
               </Link>
             ))}

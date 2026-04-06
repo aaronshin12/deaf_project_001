@@ -18,7 +18,6 @@ export const categoryEmojis: Record<string, string> = {
   "인사": "🤝",
   "감정": "😊",
   "직업": "💼",
-  "장소": "📍",
   "교통": "🚌",
   "날씨": "🌤",
   "건강": "❤️",

@@ -40,11 +40,19 @@ export function searchWords(query: string, limit = 20): SignWord[] {
   return results.sort((a, b) => a.title.localeCompare(b.title, "ko"));
 }
 
+const categoryRename: Record<string, string> = {
+  "나라명 및 지명": "장소",
+};
+
+function normalizeCat(cat: string): string {
+  return categoryRename[cat] || cat || "기타";
+}
+
 export function getCategories(): { name: string; count: number }[] {
   const counts = new Map<string, number>();
 
   for (const word of signWords) {
-    const cat = word.categoryType || "기타";
+    const cat = normalizeCat(word.categoryType);
     counts.set(cat, (counts.get(cat) || 0) + 1);
   }
 
@@ -55,7 +63,7 @@ export function getCategories(): { name: string; count: number }[] {
 
 export function getWordsByCategory(category: string): SignWord[] {
   return signWords
-    .filter((w) => (w.categoryType || "기타") === category)
+    .filter((w) => normalizeCat(w.categoryType) === category)
     .sort((a, b) => a.title.localeCompare(b.title, "ko"));
 }
 

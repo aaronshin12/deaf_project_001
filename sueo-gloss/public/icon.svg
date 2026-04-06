@@ -1,14 +1,25 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="180" height="180" rx="40" fill="#FAF6F0"/>
-  <ellipse cx="90" cy="105" rx="52" ry="52" fill="#D97757"/>
-  <ellipse cx="90" cy="117" rx="34" ry="34" fill="#F0B8A0"/>
-  <circle cx="72" cy="89" r="20" fill="white"/>
-  <circle cx="108" cy="89" r="20" fill="white"/>
-  <circle cx="74" cy="89" r="10" fill="#2D2B2A"/>
-  <circle cx="110" cy="89" r="10" fill="#2D2B2A"/>
-  <circle cx="70" cy="85" r="4" fill="white"/>
-  <circle cx="106" cy="85" r="4" fill="white"/>
-  <path d="M82 99 L90 109 L98 99 Z" fill="#C4956A"/>
-  <path d="M55 72 Q72 62 86 72" stroke="#C4623F" strokeWidth="4" strokeLinecap="round" fill="none"/>
-  <path d="M94 72 Q108 62 125 72" stroke="#C4623F" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <rect width="180" height="180" rx="40" fill="#D97757"/>
+  <!-- Ear tufts -->
+  <path d="M30 45 L45 15 L65 50" fill="#C4623F"/>
+  <path d="M35 45 L47 22 L62 50" fill="#D97757"/>
+  <path d="M115 50 L135 15 L150 45" fill="#C4623F"/>
+  <path d="M118 50 L133 22 L145 45" fill="#D97757"/>
+  <!-- Belly -->
+  <ellipse cx="90" cy="130" rx="55" ry="45" fill="#F0B8A0"/>
+  <!-- Eyes -->
+  <circle cx="68" cy="80" r="28" fill="white"/>
+  <circle cx="112" cy="80" r="28" fill="white"/>
+  <circle cx="72" cy="80" r="14" fill="#2D2B2A"/>
+  <circle cx="116" cy="80" r="14" fill="#2D2B2A"/>
+  <circle cx="66" cy="73" r="6" fill="white"/>
+  <circle cx="110" cy="73" r="6" fill="white"/>
+  <!-- Eyebrows -->
+  <path d="M42 50 Q68 35 90 50" stroke="#C4623F" strokeWidth="5" strokeLinecap="round" fill="none"/>
+  <path d="M90 50 Q112 35 138 50" stroke="#C4623F" strokeWidth="5" strokeLinecap="round" fill="none"/>
+  <!-- Beak -->
+  <path d="M78 100 L90 118 L102 100 Z" fill="#C4956A"/>
+  <!-- Blush -->
+  <ellipse cx="48" cy="100" rx="12" ry="7" fill="#F0B8A0" opacity="0.6"/>
+  <ellipse cx="132" cy="100" rx="12" ry="7" fill="#F0B8A0" opacity="0.6"/>
 </svg>

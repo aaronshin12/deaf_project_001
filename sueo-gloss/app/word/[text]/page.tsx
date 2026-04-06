@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useParams } from "next/navigation";
 import TopNav from "@/components/TopNav";
 import { useWordBook } from "@/lib/useUserData";
@@ -11,6 +11,7 @@ export default function WordPage() {
   const params = useParams();
   const wordText = decodeURIComponent(params.text as string);
   const { isInWordBook, toggleWord } = useWordBook();
+  const [popupImage, setPopupImage] = useState<string | null>(null);
 
   const signData = useMemo(() => getWord(wordText), [wordText]);
   const inWordBook = isInWordBook(wordText);
@@ -82,7 +83,8 @@ export default function WordPage() {
                     key={i}
                     src={img.replace("http://", "https://")}
                     alt={`${wordText} 수형 ${i + 1}`}
-                    className="rounded-xl border border-card-border bg-bg-warm max-w-full"
+                    className="rounded-xl border border-card-border bg-bg-warm max-w-full cursor-pointer hover:opacity-80 transition-opacity"
+                    onClick={() => setPopupImage(img.replace("http://", "https://"))}
                   />
                 ))}
               </div>
@@ -107,6 +109,20 @@ export default function WordPage() {
           수어사전에서 보기 →
         </a>
       </div>
+
+      {/* Image popup */}
+      {popupImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          onClick={() => setPopupImage(null)}
+        >
+          <img
+            src={popupImage}
+            alt="수형 이미지 확대"
+            className="max-w-full max-h-[85vh] rounded-2xl shadow-2xl"
+          />
+        </div>
+      )}
     </main>
   );
 }

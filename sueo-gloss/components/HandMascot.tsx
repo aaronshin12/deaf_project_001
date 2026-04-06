@@ -22,13 +22,13 @@ export default function HandMascot({ state }: HandMascotProps) {
   const isJump = tapped && tapCount % 4 === 0;
 
   return (
-    <div className="flex justify-center items-center gap-3 py-5 select-none">
+    <div className="flex justify-center items-center gap-3 pt-4 pb-1 select-none">
       {/* Speech bubble - appears on tap, left side */}
       <div className="w-20 flex justify-end">
         {tapped && (
           <div className="relative bg-white rounded-2xl px-3 py-1.5 shadow-sm animate-fade-in">
             <div className="absolute top-1/2 -right-[6px] -translate-y-1/2 w-2.5 h-2.5 bg-white rotate-45" />
-            <p className="text-sm font-bold text-accent whitespace-nowrap">수엉수엉</p>
+            <p className="text-base font-bold text-accent whitespace-nowrap">수엉수엉</p>
           </div>
         )}
       </div>
@@ -49,8 +49,8 @@ export default function HandMascot({ state }: HandMascotProps) {
         }}
       >
         <svg
-          width="72"
-          height="72"
+          width="120"
+          height="120"
           viewBox="0 0 72 72"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

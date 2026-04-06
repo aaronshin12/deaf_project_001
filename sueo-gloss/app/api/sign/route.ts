@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { searchSign } from "@/lib/kcisaApi";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: NextRequest) {
   const keyword = request.nextUrl.searchParams.get("keyword");
 
@@ -11,7 +13,7 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const results = await searchSign(keyword);
+  const { results, debug } = await searchSign(keyword);
 
-  return NextResponse.json({ results });
+  return NextResponse.json({ results, debug });
 }

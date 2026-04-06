@@ -3,7 +3,8 @@
 import { useState, useCallback, useEffect } from "react";
 
 const NOTES_KEY = "sueo-gloss-notes";
-const REVIEWS_KEY = "sueo-gloss-reviews";
+const WORDBOOK_KEY = "sueo-gloss-wordbook";
+const CUSTOM_WORDS_KEY = "sueo-gloss-custom-words";
 
 function loadFromStorage<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
@@ -53,30 +54,93 @@ export function useNotes() {
   return { notes, setNote, getNote, hasNote };
 }
 
-export function useReviewMarks() {
-  const [marks, setMarks] = useState<Record<string, boolean>>({});
+export function useWordBook() {
+  const [words, setWords] = useState<Record<string, boolean>>({});
+  const [customWords, setCustomWords] = useState<string[]>([]);
 
   useEffect(() => {
-    setMarks(loadFromStorage(REVIEWS_KEY, {}));
+    setWords(loadFromStorage(WORDBOOK_KEY, {}));
+    setCustomWords(loadFromStorage(CUSTOM_WORDS_KEY, []));
   }, []);
 
-  const toggleMark = useCallback((word: string) => {
-    setMarks((prev) => {
+  const addWord = useCallback((word: string) => {
+    setWords((prev) => {
+      const next = { ...prev, [word]: true };
+      saveToStorage(WORDBOOK_KEY, next);
+      return next;
+    });
+  }, []);
+
+  const removeWord = useCallback((word: string) => {
+    setWords((prev) => {
+      const next = { ...prev };
+      delete next[word];
+      saveToStorage(WORDBOOK_KEY, next);
+      return next;
+    });
+  }, []);
+
+  const isInWordBook = useCallback(
+    (word: string) => Boolean(words[word]),
+    [words]
+  );
+
+  const toggleWord = useCallback((word: string) => {
+    setWords((prev) => {
       const next = { ...prev };
       if (next[word]) {
         delete next[word];
       } else {
         next[word] = true;
       }
-      saveToStorage(REVIEWS_KEY, next);
+      saveToStorage(WORDBOOK_KEY, next);
       return next;
     });
   }, []);
 
-  const isMarked = useCallback(
-    (word: string) => Boolean(marks[word]),
-    [marks]
-  );
+  const addCustomWord = useCallback((word: string) => {
+    const trimmed = word.trim();
+    if (!trimmed) return;
+    setCustomWords((prev) => {
+      if (prev.includes(trimmed)) return prev;
+      const next = [...prev, trimmed];
+      saveToStorage(CUSTOM_WORDS_KEY, next);
+      return next;
+    });
+    // Also add to wordbook
+    setWords((prev) => {
+      const next = { ...prev, [trimmed]: true };
+      saveToStorage(WORDBOOK_KEY, next);
+      return next;
+    });
+  }, []);
 
-  return { marks, toggleMark, isMarked };
+  const removeCustomWord = useCallback((word: string) => {
+    setCustomWords((prev) => {
+      const next = prev.filter((w) => w !== word);
+      saveToStorage(CUSTOM_WORDS_KEY, next);
+      return next;
+    });
+    // Also remove from wordbook
+    setWords((prev) => {
+      const next = { ...prev };
+      delete next[word];
+      saveToStorage(WORDBOOK_KEY, next);
+      return next;
+    });
+  }, []);
+
+  const allWords = Object.keys(words).filter((w) => words[w]);
+
+  return {
+    words,
+    allWords,
+    customWords,
+    addWord,
+    removeWord,
+    isInWordBook,
+    toggleWord,
+    addCustomWord,
+    removeCustomWord,
+  };
 }

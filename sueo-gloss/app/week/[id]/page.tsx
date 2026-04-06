@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import TopNav from "@/components/TopNav";
 import WordItem from "@/components/WordItem";
-import { useNotes, useReviewMarks } from "@/lib/useUserData";
+import { useNotes, useWordBook } from "@/lib/useUserData";
 
 interface Word {
   text: string;
@@ -28,7 +28,7 @@ export default function WeekPage() {
   const [week, setWeek] = useState<Week | null>(null);
   const [loading, setLoading] = useState(true);
   const { hasNote } = useNotes();
-  const { isMarked, toggleMark } = useReviewMarks();
+  const { isInWordBook, toggleWord } = useWordBook();
 
   useEffect(() => {
     fetch("/api/curriculum")
@@ -70,7 +70,7 @@ export default function WeekPage() {
     );
   }
 
-  const reviewCount = week.words.filter((w) => isMarked(w.text)).length;
+  const wordBookCount = week.words.filter((w) => isInWordBook(w.text)).length;
 
   return (
     <main className="min-h-screen bg-bg pb-8">
@@ -89,12 +89,12 @@ export default function WeekPage() {
             <span className="text-xs text-text-light font-medium">
               총 {week.words.length}개 단어
             </span>
-            {reviewCount > 0 && (
+            {wordBookCount > 0 && (
               <span className="text-xs text-clay flex items-center gap-1 font-medium">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
                 </svg>
-                복습 {reviewCount}개
+                단어장 {wordBookCount}개
               </span>
             )}
           </div>
@@ -106,9 +106,9 @@ export default function WeekPage() {
             <WordItem
               key={word.text}
               text={word.text}
-              isReviewed={isMarked(word.text)}
+              isReviewed={isInWordBook(word.text)}
               hasNote={hasNote(word.text)}
-              onToggleReview={() => toggleMark(word.text)}
+              onToggleReview={() => toggleWord(word.text)}
             />
           ))}
         </div>

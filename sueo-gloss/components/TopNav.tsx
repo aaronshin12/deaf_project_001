@@ -29,9 +29,9 @@ export default function TopNav() {
           className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold bg-card border border-card-border text-text-main hover:border-clay/40 transition-colors card-shadow"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="#C4956A">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
           </svg>
-          복습하기
+          내 단어장
         </Link>
       </div>
 

@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import TopNav from "@/components/TopNav";
 import NoteEditor from "@/components/NoteEditor";
 import WeekLinks from "@/components/WeekLinks";
-import { useNotes } from "@/lib/useUserData";
+import { useNotes, useWordBook } from "@/lib/useUserData";
 import { buildSearchUrl } from "@/lib/buildDictUrl";
 
 interface Word {
@@ -30,7 +30,9 @@ export default function WordPage() {
   const [relatedWeeks, setRelatedWeeks] = useState<{ id: string; title: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [iframeKey, setIframeKey] = useState(0);
   const { getNote, setNote } = useNotes();
+  const { isInWordBook, toggleWord } = useWordBook();
 
   useEffect(() => {
     fetch("/api/curriculum")
@@ -52,6 +54,12 @@ export default function WordPage() {
   }, [wordText, wordData]);
 
   const searchUrl = buildSearchUrl(wordText);
+  const inWordBook = isInWordBook(wordText);
+
+  const handleRefreshIframe = () => {
+    setIframeLoaded(false);
+    setIframeKey((k) => k + 1);
+  };
 
   if (loading) {
     return (
@@ -74,28 +82,44 @@ export default function WordPage() {
       <div className="max-w-app mx-auto px-4">
         <TopNav />
 
-        {/* Word header */}
-        <div className="mt-3 mb-4">
+        {/* Word header + wordbook button */}
+        <div className="mt-3 mb-4 flex items-start justify-between gap-3">
           <h1 className="text-3xl font-bold text-text-main tracking-tight">{wordText}</h1>
-          {wordData?.description && (
-            <p className="text-sm text-text-sub mt-2 leading-relaxed">
-              {wordData.description}
-            </p>
-          )}
+          <button
+            onClick={() => toggleWord(wordText)}
+            className={`flex-shrink-0 mt-1 px-3.5 py-2 rounded-xl text-sm font-bold transition-all ${
+              inWordBook
+                ? "bg-accent text-white"
+                : "bg-accent text-white shadow-[0_2px_0_#C4623F] btn-soft"
+            }`}
+          >
+            {inWordBook ? "추가됨 ✓" : "단어장 추가"}
+          </button>
         </div>
 
         {/* Sign language dictionary - inline iframe */}
         <div className="bg-card border border-card-border rounded-card overflow-hidden card-shadow mb-4">
           <div className="px-4 py-2.5 border-b border-card-border flex items-center justify-between">
             <span className="text-xs font-semibold text-text-sub">수어사전</span>
-            <a
-              href={searchUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-accent hover:underline"
-            >
-              새 탭에서 열기
-            </a>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleRefreshIframe}
+                className="text-xs text-text-sub hover:text-accent transition-colors flex items-center gap-1"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
+                </svg>
+                새로고침
+              </button>
+              <a
+                href={searchUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-accent hover:underline"
+              >
+                새 탭
+              </a>
+            </div>
           </div>
           <div className="relative" style={{ height: "480px" }}>
             {!iframeLoaded && (
@@ -111,6 +135,7 @@ export default function WordPage() {
               </div>
             )}
             <iframe
+              key={iframeKey}
               src={searchUrl}
               className="w-full h-full border-0"
               onLoad={() => setIframeLoaded(true)}

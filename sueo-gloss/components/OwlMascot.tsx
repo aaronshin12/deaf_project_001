@@ -5,10 +5,10 @@ interface OwlMascotProps {
 }
 
 const messages = {
-  idle: "문장을 입력해 봐! 🤟",
-  loading: "수어로 바꾸는 중...",
-  success: "토큰을 눌러서 수어를 확인해!",
-  error: "앗, 다시 시도해 볼까?",
+  idle: "오늘도 수어 연습해 볼까요?",
+  loading: "불러오는 중...",
+  success: "단어를 눌러서 수어를 확인해요!",
+  error: "앗, 다시 시도해 볼까요?",
 };
 
 export default function OwlMascot({ state }: OwlMascotProps) {

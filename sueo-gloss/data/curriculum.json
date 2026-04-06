@@ -1,0 +1,156 @@
+{
+  "weeks": [
+    {
+      "id": "week-1",
+      "title": "1주차: 만남과 인사",
+      "description": "처음 만남에서 쓰는 기본 인사와 자기소개 표현을 배워봅니다.",
+      "words": [
+        { "text": "안녕하세요", "description": "양 손을 가슴 앞에서 가볍게 모으며 고개를 숙이는 동작" },
+        { "text": "감사합니다", "description": "오른손을 이마에서 앞으로 내리는 동작" },
+        { "text": "이름", "description": "자기소개의 시작. '이름'을 표현한 뒤 지문자로 이름을 나타냄" },
+        { "text": "만나다", "description": "양 손 검지를 서로 마주 향하게 하여 가까이 붙이는 동작" },
+        { "text": "반갑다", "description": "만남의 기쁨을 표현. 양 손을 가슴 앞에서 가볍게 흔듦" },
+        { "text": "처음", "description": "검지로 '1'을 만들어 강조하는 동작" },
+        { "text": "수어", "description": "양 손으로 수어를 하는 모양을 만드는 동작" },
+        { "text": "배우다", "description": "한 손에서 다른 손으로 지식을 옮기는 듯한 동작" }
+      ]
+    },
+    {
+      "id": "week-2",
+      "title": "2주차: 가족과 관계",
+      "description": "가족 구성원과 관계를 나타내는 표현을 익혀봅니다.",
+      "words": [
+        { "text": "가족", "description": "양 손으로 지붕 모양을 만들어 '한 집안'을 표현" },
+        { "text": "아버지", "description": "엄지를 이마 쪽에 대는 동작" },
+        { "text": "어머니", "description": "엄지를 볼 쪽에 대는 동작" },
+        { "text": "형제", "description": "검지 두 개를 나란히 세워 형제를 나타냄" },
+        { "text": "자녀", "description": "아이를 안는 듯한 동작으로 표현" },
+        { "text": "결혼", "description": "양 손을 맞잡는 동작" },
+        { "text": "사랑", "description": "양 팔을 가슴 앞에서 교차하여 안는 동작" },
+        { "text": "친구", "description": "양 손 새끼손가락을 걸어 우정을 나타냄" }
+      ]
+    },
+    {
+      "id": "week-3",
+      "title": "3주차: 음식과 식사",
+      "description": "일상에서 자주 쓰는 음식 관련 수어를 배워봅니다.",
+      "words": [
+        { "text": "밥", "description": "한 손으로 밥그릇, 다른 손으로 숟가락을 표현" },
+        { "text": "물", "description": "손가락을 모아 입 쪽으로 가져가는 마시는 동작" },
+        { "text": "먹다", "description": "손을 입 쪽으로 반복해서 가져가는 동작" },
+        { "text": "맛있다", "description": "볼을 가볍게 두드리며 맛을 표현" },
+        { "text": "배고프다", "description": "배를 쓸어내리는 동작" },
+        { "text": "커피", "description": "컵을 잡고 돌리는 동작" },
+        { "text": "고기", "description": "한 손으로 살을 잡는 듯한 동작" },
+        { "text": "과일", "description": "사과를 따는 듯한 동작" }
+      ]
+    },
+    {
+      "id": "week-4",
+      "title": "4주차: 장소와 이동",
+      "description": "일상에서 자주 가는 장소와 이동 관련 표현입니다.",
+      "words": [
+        { "text": "학교", "description": "책을 펼치는 동작으로 학습 장소를 표현" },
+        { "text": "병원", "description": "팔에 십자가 표시를 하는 동작" },
+        { "text": "집", "description": "양 손으로 지붕 모양을 만드는 동작" },
+        { "text": "가다", "description": "검지를 앞으로 향하여 이동 방향을 가리킴" },
+        { "text": "오다", "description": "검지를 자신 쪽으로 당기는 동작" },
+        { "text": "버스", "description": "손잡이를 잡는 듯한 동작" },
+        { "text": "지하철", "description": "손가락으로 지하로 내려가는 선을 그림" },
+        { "text": "가게", "description": "물건을 진열하는 듯한 동작" }
+      ]
+    },
+    {
+      "id": "week-5",
+      "title": "5주차: 감정과 상태",
+      "description": "기쁨, 슬픔 등 다양한 감정과 상태를 수어로 표현해봅니다.",
+      "words": [
+        { "text": "기쁘다", "description": "양 손을 가슴에서 위로 올리며 밝은 표정" },
+        { "text": "슬프다", "description": "눈 아래에서 손가락을 내리며 눈물을 표현" },
+        { "text": "화나다", "description": "주먹을 쥐고 이마 쪽에서 힘을 주는 동작" },
+        { "text": "걱정", "description": "이마를 반복해서 가볍게 두드리는 동작" },
+        { "text": "피곤하다", "description": "양 손을 어깨에서 아래로 떨어뜨리는 동작" },
+        { "text": "아프다", "description": "아픈 부위를 가리키며 얼굴을 찡그림" },
+        { "text": "좋다", "description": "엄지를 위로 올리는 동작" },
+        { "text": "싫다", "description": "손바닥을 밖으로 밀어내는 거부 동작" },
+        { "text": "사랑", "description": "양 팔을 가슴 앞에서 교차하여 안는 동작" }
+      ]
+    },
+    {
+      "id": "week-6",
+      "title": "6주차: 시간과 날짜",
+      "description": "시간, 요일, 날짜와 관련된 필수 수어 표현입니다.",
+      "words": [
+        { "text": "오늘", "description": "손바닥을 아래로 향해 '지금 여기'를 가리키는 동작" },
+        { "text": "내일", "description": "엄지를 앞으로 향하여 미래를 가리킴" },
+        { "text": "어제", "description": "엄지를 뒤로 향하여 과거를 가리킴" },
+        { "text": "시간", "description": "손목시계 위치를 가리키는 동작" },
+        { "text": "아침", "description": "해가 뜨는 것을 양 손으로 표현" },
+        { "text": "저녁", "description": "해가 지는 것을 양 손으로 표현" },
+        { "text": "월요일", "description": "'달(月)'을 표현한 뒤 '요일' 표현" },
+        { "text": "주말", "description": "한 주의 끝을 손으로 표현" }
+      ]
+    },
+    {
+      "id": "week-7",
+      "title": "7주차: 직업과 일",
+      "description": "다양한 직업과 일 관련 수어 표현을 익혀봅니다.",
+      "words": [
+        { "text": "일하다", "description": "양 주먹을 번갈아 두드리는 동작" },
+        { "text": "선생님", "description": "칠판에 글을 쓰는 듯한 동작" },
+        { "text": "의사", "description": "손목에서 맥박을 재는 동작" },
+        { "text": "경찰", "description": "가슴에 배지를 가리키는 동작" },
+        { "text": "요리사", "description": "프라이팬을 흔드는 듯한 동작" },
+        { "text": "회사", "description": "건물을 양 손으로 표현" },
+        { "text": "돈", "description": "엄지와 검지로 동전 모양을 만드는 동작" },
+        { "text": "쉬다", "description": "양 손을 가슴에 얹고 편안한 표정" }
+      ]
+    },
+    {
+      "id": "week-8",
+      "title": "8주차: 날씨와 계절",
+      "description": "날씨와 계절을 표현하는 수어를 배워봅니다.",
+      "words": [
+        { "text": "날씨", "description": "양 손을 하늘 쪽으로 올려 환경을 표현" },
+        { "text": "비", "description": "손가락을 위에서 아래로 흔들어 빗방울을 표현" },
+        { "text": "눈", "description": "손가락을 흩뿌리며 내리는 동작" },
+        { "text": "덥다", "description": "손으로 부채질하는 동작" },
+        { "text": "춥다", "description": "양 팔을 감싸 안고 몸을 떠는 동작" },
+        { "text": "봄", "description": "꽃이 피어나는 것을 손으로 표현" },
+        { "text": "여름", "description": "이마의 땀을 닦는 동작" },
+        { "text": "가을", "description": "나뭇잎이 떨어지는 것을 손으로 표현" }
+      ]
+    },
+    {
+      "id": "week-9",
+      "title": "9주차: 쇼핑과 숫자",
+      "description": "물건 사기, 가격 묻기 등 쇼핑에 필요한 표현과 숫자를 익힙니다.",
+      "words": [
+        { "text": "사다", "description": "한 손에서 다른 손으로 물건을 전달하는 동작" },
+        { "text": "비싸다", "description": "손을 위로 높이 올리는 동작" },
+        { "text": "싸다", "description": "손을 아래로 내리는 동작" },
+        { "text": "얼마", "description": "손가락을 비비는 동작으로 가격을 물음" },
+        { "text": "필요하다", "description": "가슴을 가리키며 원하는 것을 표현" },
+        { "text": "카드", "description": "카드를 긁는 동작" },
+        { "text": "영수증", "description": "종이를 펼치는 동작" },
+        { "text": "감사합니다", "description": "오른손을 이마에서 앞으로 내리는 동작" }
+      ]
+    },
+    {
+      "id": "week-10",
+      "title": "10주차: 종합 복습과 대화",
+      "description": "지금까지 배운 표현을 조합하여 간단한 대화를 만들어봅니다.",
+      "words": [
+        { "text": "안녕하세요", "description": "양 손을 가슴 앞에서 가볍게 모으며 고개를 숙이는 동작" },
+        { "text": "이름", "description": "자기소개의 시작. '이름'을 표현한 뒤 지문자로 이름을 나타냄" },
+        { "text": "어디", "description": "검지를 좌우로 흔들어 장소를 묻는 표현" },
+        { "text": "좋다", "description": "엄지를 위로 올리는 동작" },
+        { "text": "도와주다", "description": "한 손 위에 다른 손을 올려 도움을 표현" },
+        { "text": "다시", "description": "손을 뒤집어 반복을 나타내는 동작" },
+        { "text": "이해하다", "description": "이마 쪽에서 손을 펼치며 '알겠다'를 표현" },
+        { "text": "감사합니다", "description": "오른손을 이마에서 앞으로 내리는 동작" },
+        { "text": "만나다", "description": "양 손 검지를 서로 마주 향하게 하여 가까이 붙이는 동작" }
+      ]
+    }
+  ]
+}

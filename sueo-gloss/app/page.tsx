@@ -1,107 +1,93 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import OwlMascot from "@/components/OwlMascot";
-import GlossInput from "@/components/GlossInput";
-import GlossResult, { GlossData } from "@/components/GlossResult";
-import SuggestionChips from "@/components/SuggestionChips";
+import WeekCard from "@/components/WeekCard";
+import { useNotes, useReviewMarks } from "@/lib/useUserData";
+
+interface Word {
+  text: string;
+  description?: string;
+}
+
+interface Week {
+  id: string;
+  title: string;
+  description?: string;
+  words: Word[];
+}
+
+interface Curriculum {
+  weeks: Week[];
+}
 
 export default function Home() {
-  const [input, setInput] = useState("");
-  const [results, setResults] = useState<GlossData[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [mascotState, setMascotState] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
+  const [curriculum, setCurriculum] = useState<Curriculum | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { hasNote } = useNotes();
+  const { isMarked } = useReviewMarks();
 
-  const handleSubmit = useCallback(async () => {
-    const sentence = input.trim();
-    if (!sentence || isLoading) return;
-
-    setIsLoading(true);
-    setError(null);
-    setMascotState("loading");
-
-    try {
-      const res = await fetch("/api/gloss", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sentence }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "변환에 실패했습니다.");
-      }
-
-      setResults((prev) => [data, ...prev]);
-      setInput("");
-      setMascotState("success");
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "알 수 없는 오류가 발생했습니다.";
-      setError(message);
-      setMascotState("error");
-    } finally {
-      setIsLoading(false);
-    }
-  }, [input, isLoading]);
-
-  const handleSuggestion = (sentence: string) => {
-    setInput(sentence);
-  };
+  useEffect(() => {
+    fetch("/api/curriculum")
+      .then((res) => res.json())
+      .then((data) => {
+        setCurriculum(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
 
   return (
     <main className="min-h-screen bg-bg pb-8">
       <div className="max-w-app mx-auto px-4">
         {/* Header */}
         <header className="pt-6 pb-2 text-center">
-          <h1 className="text-2xl font-bold text-text-main">
-            수어글로스
-          </h1>
+          <h1 className="text-2xl font-bold text-text-main">수어글로스</h1>
           <p className="text-xs text-text-sub mt-1">
-            한국어 → 한국수어(KSL) 글로스 변환기
+            주차별 한국수어 복습 도구
           </p>
         </header>
 
-        {/* Owl Mascot */}
-        <OwlMascot state={mascotState} />
+        {/* Mascot */}
+        <OwlMascot state={loading ? "loading" : "idle"} />
 
-        {/* Input */}
-        <div className="mt-2">
-          <GlossInput
-            value={input}
-            onChange={setInput}
-            onSubmit={handleSubmit}
-            isLoading={isLoading}
-          />
-        </div>
+        {/* Week list */}
+        {loading ? (
+          <div className="flex justify-center py-8">
+            <div className="flex gap-1">
+              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
+              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
+              <span className="w-2 h-2 bg-green rounded-full loading-dot" />
+            </div>
+          </div>
+        ) : curriculum?.weeks ? (
+          <div className="mt-4 space-y-3">
+            {curriculum.weeks.map((week) => {
+              const reviewCount = week.words.filter((w) =>
+                isMarked(w.text)
+              ).length;
+              const noteCount = week.words.filter((w) =>
+                hasNote(w.text)
+              ).length;
 
-        {/* Error */}
-        {error && (
-          <div className="mt-3 bg-red/10 border border-red/30 rounded-xl px-4 py-3">
-            <p className="text-sm text-red">{error}</p>
+              return (
+                <WeekCard
+                  key={week.id}
+                  id={week.id}
+                  title={week.title}
+                  description={week.description}
+                  wordCount={week.words.length}
+                  reviewCount={reviewCount}
+                  noteCount={noteCount}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className="text-center py-8">
+            <p className="text-text-sub">커리큘럼이 아직 없습니다.</p>
           </div>
         )}
-
-        {/* Suggestion chips (show when no results) */}
-        {results.length === 0 && !isLoading && (
-          <div className="mt-6">
-            <p className="text-xs text-text-sub text-center mb-3">
-              예문을 선택해 보세요
-            </p>
-            <SuggestionChips onSelect={handleSuggestion} />
-          </div>
-        )}
-
-        {/* Results */}
-        <div className="mt-4 space-y-4">
-          {results.map((data, index) => (
-            <GlossResult key={`${data.input}-${index}`} data={data} />
-          ))}
-        </div>
 
         {/* Footer */}
         <footer className="mt-8 text-center">

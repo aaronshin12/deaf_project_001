@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "수어글로스 SueoGloss",
-  description: "한국어 문장을 한국수어(KSL) 글로스로 변환합니다",
+  description: "주차별 한국수어(KSL) 복습 도구 — 단어를 탭하면 수어 영상을 바로 확인하세요",
 };
 
 export const viewport: Viewport = {

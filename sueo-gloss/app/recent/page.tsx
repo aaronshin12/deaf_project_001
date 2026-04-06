@@ -5,7 +5,7 @@ import TopNav from "@/components/TopNav";
 import { useRecentlyViewed } from "@/lib/useUserData";
 
 export default function RecentPage() {
-  const { viewed, clearViewed } = useRecentlyViewed();
+  const { viewed, removeViewed, clearViewed } = useRecentlyViewed();
 
   return (
     <main className="min-h-screen bg-bg pb-8">
@@ -44,14 +44,19 @@ export default function RecentPage() {
         ) : (
           <div className="space-y-2.5">
             {viewed.map((word) => (
-              <Link key={word} href={`/word/${encodeURIComponent(word)}`}>
-                <div className="flex items-center gap-3 bg-card border border-card-border rounded-card p-3.5 card-shadow hover:border-accent/30 transition-colors">
-                  <span className="flex-1 text-base font-bold text-text-main">{word}</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="#A69E94" className="flex-shrink-0">
-                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
+              <div key={word} className="flex items-center gap-3 bg-card border border-card-border rounded-card p-3.5 card-shadow">
+                <Link href={`/word/${encodeURIComponent(word)}`} className="flex-1 min-w-0">
+                  <span className="text-base font-bold text-text-main">{word}</span>
+                </Link>
+                <button
+                  onClick={() => removeViewed(word)}
+                  className="flex-shrink-0 w-8 h-8 bg-accent rounded-full flex items-center justify-center hover:brightness-90 transition-all"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
                   </svg>
-                </div>
-              </Link>
+                </button>
+              </div>
             ))}
           </div>
         )}

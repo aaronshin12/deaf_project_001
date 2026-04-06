@@ -70,12 +70,20 @@ export function useRecentlyViewed() {
     });
   }, []);
 
+  const removeViewed = useCallback((word: string) => {
+    setViewed((prev) => {
+      const updated = prev.filter((w) => w !== word);
+      saveToStorage(RECENTLY_VIEWED_KEY, updated);
+      return updated;
+    });
+  }, []);
+
   const clearViewed = useCallback(() => {
     setViewed([]);
     saveToStorage(RECENTLY_VIEWED_KEY, []);
   }, []);
 
-  return { viewed, addViewed, clearViewed };
+  return { viewed, addViewed, removeViewed, clearViewed };
 }
 
 export function useWordBook() {

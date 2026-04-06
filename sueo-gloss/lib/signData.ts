@@ -82,12 +82,10 @@ export function getInitialConsonant(char: string): string {
 
 // Grouped consonant filters
 export const CONSONANT_GROUPS = [
-  { label: "ㄱ-ㄴ", consonants: ["ㄱ", "ㄲ", "ㄴ"] },
-  { label: "ㄷ-ㄹ", consonants: ["ㄷ", "ㄸ", "ㄹ"] },
+  { label: "ㄱ-ㄹ", consonants: ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ"] },
   { label: "ㅁ-ㅂ", consonants: ["ㅁ", "ㅂ", "ㅃ"] },
   { label: "ㅅ-ㅇ", consonants: ["ㅅ", "ㅆ", "ㅇ"] },
-  { label: "ㅈ-ㅊ", consonants: ["ㅈ", "ㅉ", "ㅊ"] },
-  { label: "ㅋ-ㅎ", consonants: ["ㅋ", "ㅌ", "ㅍ", "ㅎ"] },
+  { label: "ㅈ-ㅎ", consonants: ["ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"] },
 ];
 
 export function filterByConsonantGroup(words: SignWord[], consonants: string[]): SignWord[] {

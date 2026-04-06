@@ -81,7 +81,7 @@ export default function WeekPage() {
 
         {/* Week header */}
         <div className="mt-2 mb-5">
-          <h1 className="text-xl font-bold text-text-main tracking-tight">{week.title}</h1>
+          <h1 className="text-xl font-serif font-bold text-text-main tracking-tight">{week.title}</h1>
           {week.description && (
             <p className="text-sm text-text-sub mt-1.5 leading-relaxed">{week.description}</p>
           )}

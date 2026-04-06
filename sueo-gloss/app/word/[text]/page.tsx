@@ -84,7 +84,7 @@ export default function WordPage() {
 
         {/* Word header + wordbook button */}
         <div className="mt-3 mb-4 flex items-start justify-between gap-3">
-          <h1 className="text-3xl font-bold text-text-main tracking-tight">{wordText}</h1>
+          <h1 className="text-3xl font-serif font-bold text-text-main tracking-tight">{wordText}</h1>
           <button
             onClick={() => toggleWord(wordText)}
             className={`flex-shrink-0 mt-1 px-3.5 py-2 rounded-xl text-sm font-bold transition-all ${

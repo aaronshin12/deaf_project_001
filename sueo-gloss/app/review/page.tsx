@@ -24,7 +24,7 @@ export default function WordBookPage() {
         <TopNav />
 
         <div className="mt-2 mb-5">
-          <h1 className="text-xl font-bold text-text-main tracking-tight">
+          <h1 className="text-xl font-serif font-bold text-text-main tracking-tight">
             내 단어장
           </h1>
           <p className="text-sm text-text-sub mt-1">
@@ -82,7 +82,7 @@ export default function WordBookPage() {
                 >
                   <Link href={`/word/${encodeURIComponent(word)}`} className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-base font-medium text-text-main">{word}</span>
+                      <span className="text-base font-serif font-medium text-text-main">{word}</span>
                       {isCustom && (
                         <span className="text-[10px] px-1.5 py-0.5 rounded bg-accent/10 text-accent font-medium">직접추가</span>
                       )}

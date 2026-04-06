@@ -10,45 +10,48 @@ export interface SignEntry {
 
 const API_BASE = "http://api.kcisa.kr/openapi/service/rest/meta13/getCTE01701";
 
-export async function searchSign(keyword: string): Promise<{ results: SignEntry[]; debug?: string }> {
+export async function searchSign(keyword: string): Promise<{ results: SignEntry[]; debug?: string; rawSample?: string }> {
   const serviceKey = process.env.KCISA_API_KEY;
   if (!serviceKey) {
     return { results: [], debug: "KCISA_API_KEY not set" };
   }
 
-  // API docs say keyword must be present even if empty
-  const url = `${API_BASE}?serviceKey=${encodeURIComponent(serviceKey)}&numOfRows=5&pageNo=1&keyword=${encodeURIComponent(keyword)}`;
+  const url = `${API_BASE}?serviceKey=${encodeURIComponent(serviceKey)}&numOfRows=3&pageNo=1&keyword=${encodeURIComponent(keyword)}`;
 
   try {
-    const res = await fetch(url, {
-      headers: { Accept: "application/json" },
-    });
-
+    // Try without Accept header - let API return its default format
+    const res = await fetch(url);
     const text = await res.text();
 
     if (!res.ok) {
-      return { results: [], debug: `HTTP ${res.status}: ${text.substring(0, 200)}` };
+      return { results: [], debug: `HTTP ${res.status}`, rawSample: text.substring(0, 500) };
     }
 
-    // Try JSON parse
+    // Check if XML
+    if (text.trimStart().startsWith("<?xml") || text.trimStart().startsWith("<")) {
+      // Parse XML manually - extract items
+      return { results: [], debug: "Response is XML", rawSample: text.substring(0, 800) };
+    }
+
+    // Try JSON
     let data;
     try {
       data = JSON.parse(text);
     } catch {
-      // Might be XML
-      return { results: [], debug: `Not JSON. Response starts with: ${text.substring(0, 300)}` };
+      return { results: [], debug: "Not JSON or XML", rawSample: text.substring(0, 500) };
     }
 
-    // Navigate response structure
-    const items = data?.response?.body?.items?.item;
+    const body = data?.response?.body;
+    const items = body?.items?.item;
+
     if (!items) {
-      return { results: [], debug: `No items found. Keys: ${JSON.stringify(Object.keys(data?.response?.body || data?.response || data || {}))}. Raw: ${text.substring(0, 300)}` };
+      return { results: [], debug: `items is ${JSON.stringify(body?.items)}`, rawSample: text.substring(0, 500) };
     }
 
     const arr = Array.isArray(items) ? items : [items];
     return { results: arr };
   } catch (error) {
     const errMsg = error instanceof Error ? `${error.message} | cause: ${error.cause}` : String(error);
-    return { results: [], debug: `Fetch error: ${errMsg} | URL: ${url.substring(0, 100)}` };
+    return { results: [], debug: `Fetch error: ${errMsg}` };
   }
 }

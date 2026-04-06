@@ -41,18 +41,23 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-bg pb-8">
       <div className="max-w-app mx-auto px-4">
-        {/* Header */}
-        <header className="pt-8 pb-1 text-center">
-          <h1 className="text-2xl font-bold text-text-main tracking-tight">
-            수어글로스
-          </h1>
-          <p className="text-sm text-text-sub mt-1">
-            주차별 한국수어 복습 도구
-          </p>
-        </header>
-
         {/* Mascot */}
-        <OwlMascot state={loading ? "loading" : "idle"} />
+        <div className="pt-6">
+          <OwlMascot state={loading ? "loading" : "idle"} />
+        </div>
+
+        {/* Review button */}
+        <div className="mt-2 mb-4">
+          <Link
+            href="/review"
+            className="flex items-center justify-center gap-2 w-full py-3 bg-clay-light border border-clay/20 rounded-card text-clay font-semibold text-sm hover:bg-clay/10 transition-colors"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            복습 목록 보기
+          </Link>
+        </div>
 
         {/* Week list */}
         {loading ? (

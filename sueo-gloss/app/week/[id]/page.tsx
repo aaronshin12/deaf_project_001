@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import BackButton from "@/components/BackButton";
+import TopNav from "@/components/TopNav";
 import WordItem from "@/components/WordItem";
 import { useNotes, useReviewMarks } from "@/lib/useUserData";
 
@@ -61,7 +61,7 @@ export default function WeekPage() {
     return (
       <main className="min-h-screen bg-bg">
         <div className="max-w-app mx-auto px-4 pt-6">
-          <BackButton />
+          <TopNav />
           <div className="text-center py-16">
             <p className="text-text-sub">주차를 찾을 수 없습니다.</p>
           </div>
@@ -76,7 +76,7 @@ export default function WeekPage() {
     <main className="min-h-screen bg-bg pb-8">
       <div className="max-w-app mx-auto px-4">
         <div className="pt-4">
-          <BackButton label="전체 주차" />
+          <TopNav />
         </div>
 
         {/* Week header */}

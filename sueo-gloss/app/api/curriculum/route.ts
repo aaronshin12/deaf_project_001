@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readCurriculum, writeCurriculum, Curriculum } from "@/lib/curriculum";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
-    const curriculum = readCurriculum();
+    const curriculum = await readCurriculum();
     return NextResponse.json(curriculum);
   } catch (error) {
     console.error("Failed to read curriculum:", error);
@@ -35,7 +37,7 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    writeCurriculum(data);
+    await writeCurriculum(data);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Failed to write curriculum:", error);

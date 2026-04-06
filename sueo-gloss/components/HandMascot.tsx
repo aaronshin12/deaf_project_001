@@ -22,12 +22,12 @@ export default function HandMascot({ state }: HandMascotProps) {
   const isJump = tapped && tapCount % 4 === 0;
 
   return (
-    <div className="flex justify-center items-center gap-3 pt-4 pb-1 select-none">
+    <div className="flex justify-center items-center gap-3 pt-4 pb-2 select-none">
       {/* Speech bubble - appears on tap, left side */}
       <div className="w-20 flex justify-end">
         {tapped && (
-          <div className="relative bg-white rounded-2xl px-3 py-1.5 shadow-sm animate-fade-in">
-            <div className="absolute top-1/2 -right-[6px] -translate-y-1/2 w-2.5 h-2.5 bg-white rotate-45" />
+          <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl px-3 py-1.5 shadow-lg animate-fade-in">
+            <div className="absolute top-1/2 -right-[6px] -translate-y-1/2 w-2.5 h-2.5 bg-white/90 rotate-45" />
             <p className="text-base font-bold text-accent whitespace-nowrap">수엉수엉</p>
           </div>
         )}
@@ -36,7 +36,7 @@ export default function HandMascot({ state }: HandMascotProps) {
       {/* Owl */}
       <div
         onClick={handleTap}
-        className="cursor-pointer"
+        className="cursor-pointer drop-shadow-[0_4px_20px_rgba(124,92,252,0.3)]"
         style={{
           transform: tapped
             ? isJump
@@ -56,24 +56,33 @@ export default function HandMascot({ state }: HandMascotProps) {
           xmlns="http://www.w3.org/2000/svg"
           className={state === "loading" ? "animate-bounce" : ""}
         >
+          {/* Subtle glow behind owl */}
+          <defs>
+            <radialGradient id="owlGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#B8A5FF" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#B8A5FF" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <circle cx="36" cy="42" r="34" fill="url(#owlGlow)" />
+
           {/* Left wing - folded against body */}
-          <path d="M12 32 Q8 45 14 60 Q18 55 20 42 Z" fill="#C4623F" />
-          <path d="M13 34 Q10 45 15 57 Q18 52 19 42 Z" fill="#D97757" />
+          <path d="M12 32 Q8 45 14 60 Q18 55 20 42 Z" fill="#5A3ED9" />
+          <path d="M13 34 Q10 45 15 57 Q18 52 19 42 Z" fill="#7C5CFC" />
           {/* Right wing - folded against body */}
-          <path d="M60 32 Q64 45 58 60 Q54 55 52 42 Z" fill="#C4623F" />
-          <path d="M59 34 Q62 45 57 57 Q54 52 53 42 Z" fill="#D97757" />
+          <path d="M60 32 Q64 45 58 60 Q54 55 52 42 Z" fill="#5A3ED9" />
+          <path d="M59 34 Q62 45 57 57 Q54 52 53 42 Z" fill="#7C5CFC" />
 
           {/* Body */}
-          <ellipse cx="36" cy="42" rx="26" ry="26" fill="#D97757" />
+          <ellipse cx="36" cy="42" rx="26" ry="26" fill="#7C5CFC" />
           {/* Belly */}
-          <ellipse cx="36" cy="48" rx="17" ry="17" fill="#F0B8A0" />
+          <ellipse cx="36" cy="48" rx="17" ry="17" fill="#B8A5FF" />
 
           {/* Left ear tuft */}
-          <path d="M16 18 L20 10 L26 20" fill="#C4623F" />
-          <path d="M18 18 L21 13 L25 20" fill="#D97757" />
+          <path d="M16 18 L20 10 L26 20" fill="#5A3ED9" />
+          <path d="M18 18 L21 13 L25 20" fill="#7C5CFC" />
           {/* Right ear tuft */}
-          <path d="M46 20 L52 10 L56 18" fill="#C4623F" />
-          <path d="M47 20 L51 13 L54 18" fill="#D97757" />
+          <path d="M46 20 L52 10 L56 18" fill="#5A3ED9" />
+          <path d="M47 20 L51 13 L54 18" fill="#7C5CFC" />
 
           {/* Left eye white */}
           <circle cx="27" cy="34" r="10" fill="white" />
@@ -83,13 +92,13 @@ export default function HandMascot({ state }: HandMascotProps) {
           {/* Pupils */}
           {isWink ? (
             <>
-              <path d="M22 34 Q27 38 32 34" stroke="#2D2B2A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-              <circle cx="46" cy="34" r="5" fill="#2D2B2A" />
+              <path d="M22 34 Q27 38 32 34" stroke="#1A1625" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+              <circle cx="46" cy="34" r="5" fill="#1A1625" />
             </>
           ) : isDizzy ? (
             <>
-              <path d="M24 31 L30 37 M30 31 L24 37" stroke="#2D2B2A" strokeWidth="2" strokeLinecap="round" />
-              <path d="M42 31 L48 37 M48 31 L42 37" stroke="#2D2B2A" strokeWidth="2" strokeLinecap="round" />
+              <path d="M24 31 L30 37 M30 31 L24 37" stroke="#1A1625" strokeWidth="2" strokeLinecap="round" />
+              <path d="M42 31 L48 37 M48 31 L42 37" stroke="#1A1625" strokeWidth="2" strokeLinecap="round" />
             </>
           ) : (
             <>
@@ -97,13 +106,13 @@ export default function HandMascot({ state }: HandMascotProps) {
                 cx={state === "loading" ? "29" : "28"}
                 cy={state === "error" ? "36" : "34"}
                 r="5"
-                fill="#2D2B2A"
+                fill="#1A1625"
               />
               <circle
                 cx={state === "loading" ? "47" : "46"}
                 cy={state === "error" ? "36" : "34"}
                 r="5"
-                fill="#2D2B2A"
+                fill="#1A1625"
               />
             </>
           )}
@@ -127,7 +136,7 @@ export default function HandMascot({ state }: HandMascotProps) {
               state === "error" ? "M18 27 Q27 31 34 27" :
               "M18 25 Q27 19 34 25"
             }
-            stroke="#C4623F"
+            stroke="#5A3ED9"
             strokeWidth="2.5"
             strokeLinecap="round"
             fill="none"
@@ -139,15 +148,15 @@ export default function HandMascot({ state }: HandMascotProps) {
               state === "error" ? "M38 27 Q45 31 54 27" :
               "M38 25 Q45 19 54 25"
             }
-            stroke="#C4623F"
+            stroke="#5A3ED9"
             strokeWidth="2.5"
             strokeLinecap="round"
             fill="none"
           />
 
           {/* Blush */}
-          <ellipse cx="20" cy="40" rx={tapped ? "5" : "4"} ry={tapped ? "3.5" : "2.5"} fill="#F0B8A0" opacity={tapped ? "0.8" : "0.5"} />
-          <ellipse cx="52" cy="40" rx={tapped ? "5" : "4"} ry={tapped ? "3.5" : "2.5"} fill="#F0B8A0" opacity={tapped ? "0.8" : "0.5"} />
+          <ellipse cx="20" cy="40" rx={tapped ? "5" : "4"} ry={tapped ? "3.5" : "2.5"} fill="#B8A5FF" opacity={tapped ? "0.8" : "0.5"} />
+          <ellipse cx="52" cy="40" rx={tapped ? "5" : "4"} ry={tapped ? "3.5" : "2.5"} fill="#B8A5FF" opacity={tapped ? "0.8" : "0.5"} />
 
           {/* Heart */}
           {isHeart && (

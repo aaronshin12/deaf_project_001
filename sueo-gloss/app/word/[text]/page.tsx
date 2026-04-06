@@ -49,8 +49,7 @@ export default function WordPage() {
               poster={thumbnail ? thumbnail.replace("http://", "https://") : undefined}
               controls
               playsInline
-              preload="metadata"
-              loop
+              preload="none"
               className="w-full"
             />
           </div>

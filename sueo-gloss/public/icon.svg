@@ -1,12 +1,23 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="180" height="180" rx="40" fill="#FAF6F0"/>
-  <ellipse cx="90" cy="105" rx="52" ry="52" fill="#D97757"/>
-  <ellipse cx="90" cy="117" rx="34" ry="34" fill="#F0B8A0"/>
-  <circle cx="72" cy="89" r="20" fill="white"/>
-  <circle cx="108" cy="89" r="20" fill="white"/>
-  <circle cx="74" cy="89" r="10" fill="#2D2B2A"/>
-  <circle cx="110" cy="89" r="10" fill="#2D2B2A"/>
-  <path d="M82 99 L90 109 L98 99 Z" fill="#C4956A"/>
-  <path d="M55 72 Q72 62 86 72" stroke="#C4623F" strokeWidth="4" strokeLinecap="round" fill="none"/>
-  <path d="M94 72 Q108 62 125 72" stroke="#C4623F" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <!-- Palm -->
+  <rect x="45" y="40" width="90" height="80" rx="25" fill="#D97757"/>
+  <!-- Eyes -->
+  <ellipse cx="72" cy="72" rx="14" ry="14" fill="white"/>
+  <ellipse cx="108" cy="72" rx="14" ry="14" fill="white"/>
+  <circle cx="74" cy="72" r="7" fill="#2D2B2A"/>
+  <circle cx="110" cy="72" r="7" fill="#2D2B2A"/>
+  <circle cx="71" cy="68" r="3" fill="white"/>
+  <circle cx="107" cy="68" r="3" fill="white"/>
+  <!-- Eyebrows -->
+  <path d="M55 52 Q72 42 86 52" stroke="#C4623F" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <path d="M94 52 Q108 42 125 52" stroke="#C4623F" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <!-- Smile -->
+  <path d="M76 96 Q90 108 104 96" stroke="#C4623F" strokeWidth="3" strokeLinecap="round" fill="none"/>
+  <!-- Legs -->
+  <rect x="60" y="118" width="22" height="36" rx="11" fill="#E89A7A"/>
+  <rect x="98" y="118" width="22" height="36" rx="11" fill="#E89A7A"/>
+  <!-- Feet -->
+  <ellipse cx="71" cy="156" rx="13" ry="6" fill="#C4623F"/>
+  <ellipse cx="109" cy="156" rx="13" ry="6" fill="#C4623F"/>
 </svg>

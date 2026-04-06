@@ -1,81 +1,32 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useMemo } from "react";
 import { useParams } from "next/navigation";
 import TopNav from "@/components/TopNav";
 import NoteEditor from "@/components/NoteEditor";
-import WeekLinks from "@/components/WeekLinks";
 import { useNotes, useWordBook } from "@/lib/useUserData";
+import { getWord } from "@/lib/signData";
 import { buildSearchUrl } from "@/lib/buildDictUrl";
-
-interface Word {
-  text: string;
-  description?: string;
-}
-
-interface Week {
-  id: string;
-  title: string;
-  words: Word[];
-}
-
-interface Curriculum {
-  weeks: Week[];
-}
 
 export default function WordPage() {
   const params = useParams();
   const wordText = decodeURIComponent(params.text as string);
-  const [wordData, setWordData] = useState<Word | null>(null);
-  const [relatedWeeks, setRelatedWeeks] = useState<{ id: string; title: string }[]>([]);
-  const [loading, setLoading] = useState(true);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
   const { getNote, setNote } = useNotes();
   const { isInWordBook, toggleWord } = useWordBook();
 
-  useEffect(() => {
-    fetch("/api/curriculum")
-      .then((res) => res.json())
-      .then((data: Curriculum) => {
-        for (const week of data.weeks) {
-          const found = week.words.find((w) => w.text === wordText);
-          if (found && !wordData) {
-            setWordData(found);
-          }
-        }
-        const weeks = data.weeks
-          .filter((w) => w.words.some((word) => word.text === wordText))
-          .map((w) => ({ id: w.id, title: w.title }));
-        setRelatedWeeks(weeks);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, [wordText, wordData]);
-
+  const signData = useMemo(() => getWord(wordText), [wordText]);
   const searchUrl = buildSearchUrl(wordText);
   const inWordBook = isInWordBook(wordText);
+  const signImages = signData?.signImages
+    ? signData.signImages.split(",").map((s) => s.trim()).filter(Boolean)
+    : [];
 
   const handleRefreshIframe = () => {
     setIframeLoaded(false);
     setIframeKey((k) => k + 1);
   };
-
-  if (loading) {
-    return (
-      <main className="min-h-screen bg-bg">
-        <div className="max-w-app mx-auto px-4 pt-6">
-          <div className="flex justify-center py-16">
-            <div className="flex gap-1.5">
-              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
-              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
-              <span className="w-2 h-2 bg-accent rounded-full loading-dot" />
-            </div>
-          </div>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="min-h-screen bg-bg pb-8">
@@ -89,7 +40,7 @@ export default function WordPage() {
             onClick={() => toggleWord(wordText)}
             className={`flex-shrink-0 mt-1 px-3.5 py-2 rounded-xl text-sm font-bold transition-all ${
               inWordBook
-                ? "bg-accent text-white"
+                ? "bg-accent/10 text-accent border border-accent/30"
                 : "bg-accent text-white shadow-[0_2px_0_#C4623F] btn-soft"
             }`}
           >
@@ -97,7 +48,34 @@ export default function WordPage() {
           </button>
         </div>
 
-        {/* Sign language dictionary - inline iframe */}
+        {/* Embedded sign data from JSON */}
+        {signData && (signData.signDescription || signImages.length > 0) && (
+          <div className="bg-card border border-card-border rounded-card p-4 card-shadow mb-4 space-y-3">
+            {signData.signDescription && (
+              <div>
+                <h3 className="text-xs font-semibold text-accent uppercase tracking-wide mb-1.5">수형 설명</h3>
+                <p className="text-sm text-text-main leading-relaxed">{signData.signDescription}</p>
+              </div>
+            )}
+            {signImages.length > 0 && (
+              <div>
+                <h3 className="text-xs font-semibold text-text-light uppercase tracking-wide mb-2">수형 이미지</h3>
+                <div className="flex gap-2 overflow-x-auto pb-2">
+                  {signImages.map((img, i) => (
+                    <img
+                      key={i}
+                      src={img}
+                      alt={`${wordText} 수형 ${i + 1}`}
+                      className="w-28 h-28 object-cover rounded-xl border border-card-border flex-shrink-0 bg-bg-warm"
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Sign language dictionary iframe */}
         <div className="bg-card border border-card-border rounded-card overflow-hidden card-shadow mb-4">
           <div className="px-4 py-2.5 border-b border-card-border flex items-center justify-between">
             <span className="text-xs font-semibold text-text-sub">수어사전</span>
@@ -111,12 +89,7 @@ export default function WordPage() {
                 </svg>
                 새로고침
               </button>
-              <a
-                href={searchUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-accent hover:underline"
-              >
+              <a href={searchUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-accent hover:underline">
                 새 탭
               </a>
             </div>
@@ -153,13 +126,6 @@ export default function WordPage() {
             onSave={setNote}
           />
         </div>
-
-        {/* Cross-week links */}
-        {relatedWeeks.length > 1 && (
-          <div className="mb-4">
-            <WeekLinks word={wordText} weeks={relatedWeeks} />
-          </div>
-        )}
       </div>
     </main>
   );

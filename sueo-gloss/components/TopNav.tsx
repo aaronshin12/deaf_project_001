@@ -10,14 +10,8 @@ interface TopNavProps {
 export default function TopNav({ showBack = false }: TopNavProps) {
   const router = useRouter();
 
-  const handleRefresh = () => {
-    router.refresh();
-    window.location.reload();
-  };
-
   return (
     <div className="flex items-center justify-between pt-4 pb-2">
-      {/* Left: navigation buttons */}
       <div className="flex items-center gap-2">
         {showBack ? (
           <button
@@ -37,23 +31,13 @@ export default function TopNav({ showBack = false }: TopNavProps) {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
             </svg>
-            첫화면
+            홈
           </Link>
         )}
-        <Link
-          href="/review"
-          className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold bg-card border border-card-border text-text-main hover:border-clay/40 transition-colors card-shadow"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#C4956A">
-            <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
-          </svg>
-          내 단어장
-        </Link>
       </div>
 
-      {/* Right: refresh button */}
       <button
-        onClick={handleRefresh}
+        onClick={() => { router.refresh(); window.location.reload(); }}
         className="w-10 h-10 rounded-xl bg-card border border-card-border flex items-center justify-center hover:border-accent/40 transition-colors card-shadow"
         aria-label="새로고침"
       >

@@ -48,6 +48,7 @@ export async function searchSign(keyword: string): Promise<{ results: SignEntry[
     const arr = Array.isArray(items) ? items : [items];
     return { results: arr };
   } catch (error) {
-    return { results: [], debug: `Fetch error: ${error instanceof Error ? error.message : String(error)}` };
+    const errMsg = error instanceof Error ? `${error.message} | cause: ${error.cause}` : String(error);
+    return { results: [], debug: `Fetch error: ${errMsg} | URL: ${url.substring(0, 100)}` };
   }
 }

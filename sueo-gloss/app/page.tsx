@@ -65,7 +65,7 @@ export default function Home() {
             </div>
           </div>
         ) : curriculum?.weeks ? (
-          <div className="space-y-5">
+          <div className="flex flex-col gap-5">
             {curriculum.weeks.map((week) => (
               <WeekCard
                 key={week.id}

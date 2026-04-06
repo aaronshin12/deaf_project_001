@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import TopNav from "@/components/TopNav";
-import DictViewer from "@/components/DictViewer";
 import NoteEditor from "@/components/NoteEditor";
 import WeekLinks from "@/components/WeekLinks";
 import { useNotes } from "@/lib/useUserData";
+import { buildSearchUrl } from "@/lib/buildDictUrl";
 
 interface Word {
   text: string;
@@ -26,10 +26,10 @@ interface Curriculum {
 export default function WordPage() {
   const params = useParams();
   const wordText = decodeURIComponent(params.text as string);
-  const [showDict, setShowDict] = useState(false);
   const [wordData, setWordData] = useState<Word | null>(null);
   const [relatedWeeks, setRelatedWeeks] = useState<{ id: string; title: string }[]>([]);
   const [loading, setLoading] = useState(true);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
   const { getNote, setNote } = useNotes();
 
   useEffect(() => {
@@ -50,6 +50,8 @@ export default function WordPage() {
       })
       .catch(() => setLoading(false));
   }, [wordText, wordData]);
+
+  const searchUrl = buildSearchUrl(wordText);
 
   if (loading) {
     return (
@@ -73,25 +75,50 @@ export default function WordPage() {
         <TopNav />
 
         {/* Word header */}
-        <div className="mt-3 mb-5">
+        <div className="mt-3 mb-4">
           <h1 className="text-3xl font-bold text-text-main tracking-tight">{wordText}</h1>
           {wordData?.description && (
-            <p className="text-sm text-text-sub mt-2.5 leading-relaxed">
+            <p className="text-sm text-text-sub mt-2 leading-relaxed">
               {wordData.description}
             </p>
           )}
         </div>
 
-        {/* Video button */}
-        <button
-          onClick={() => setShowDict(true)}
-          className="w-full btn-soft bg-accent text-white font-semibold py-4 rounded-xl shadow-[0_3px_0_#C4623F] hover:brightness-105 transition-all text-lg mb-5 flex items-center justify-center gap-2"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8 5v14l11-7z" />
-          </svg>
-          수어 영상 보기
-        </button>
+        {/* Sign language dictionary - inline iframe */}
+        <div className="bg-card border border-card-border rounded-card overflow-hidden card-shadow mb-4">
+          <div className="px-4 py-2.5 border-b border-card-border flex items-center justify-between">
+            <span className="text-xs font-semibold text-text-sub">수어사전</span>
+            <a
+              href={searchUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-accent hover:underline"
+            >
+              새 탭에서 열기
+            </a>
+          </div>
+          <div className="relative" style={{ height: "480px" }}>
+            {!iframeLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-bg-warm">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="flex gap-1.5">
+                    <span className="w-2.5 h-2.5 bg-accent rounded-full loading-dot" />
+                    <span className="w-2.5 h-2.5 bg-accent rounded-full loading-dot" />
+                    <span className="w-2.5 h-2.5 bg-accent rounded-full loading-dot" />
+                  </div>
+                  <p className="text-sm text-text-sub">수어사전을 불러오는 중...</p>
+                </div>
+              </div>
+            )}
+            <iframe
+              src={searchUrl}
+              className="w-full h-full border-0"
+              onLoad={() => setIframeLoaded(true)}
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              title={`${wordText} 수어사전`}
+            />
+          </div>
+        </div>
 
         {/* Note editor */}
         <div className="mb-4">
@@ -107,14 +134,6 @@ export default function WordPage() {
           <div className="mb-4">
             <WeekLinks word={wordText} weeks={relatedWeeks} />
           </div>
-        )}
-
-        {/* Dictionary viewer popup */}
-        {showDict && (
-          <DictViewer
-            word={wordText}
-            onClose={() => setShowDict(false)}
-          />
         )}
       </div>
     </main>

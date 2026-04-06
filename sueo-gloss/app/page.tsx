@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-bg pb-8">
       {/* Dark header: mascot + search */}
-      <div className="bg-[#2D2B2A] rounded-b-3xl px-4 pb-5 relative overflow-visible" style={{ zIndex: 20 }}>
+      <div className="bg-[#2D2B2A] px-4 pb-5 relative overflow-visible" style={{ zIndex: 20 }}>
         {/* Forest background illustration */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 520 280" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
           {/* Moon - yellow, left side */}
@@ -132,8 +132,12 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {/* Wave transition */}
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full -mt-1" preserveAspectRatio="none" style={{ display: 'block' }}>
+        <path d="M0 0 L0 40 Q360 80 720 40 Q1080 0 1440 40 L1440 0 Z" fill="#2D2B2A" />
+      </svg>
 
-      <div className="max-w-app mx-auto px-4">
+      <div className="max-w-app mx-auto px-4 mt-6">
         {/* Categories - emoji + title, no box around icon */}
         {categories.length > 0 && (
           <div className="grid grid-cols-4 gap-x-3 gap-y-7">

@@ -6,12 +6,14 @@ import Link from "next/link";
 import TopNav from "@/components/TopNav";
 import { getWordsByCategory } from "@/lib/signData";
 import { useWordBook } from "@/lib/useUserData";
+import { getEmoji } from "@/lib/categoryEmojis";
 
 export default function CategoryPage() {
   const params = useParams();
   const category = decodeURIComponent(params.type as string);
   const words = useMemo(() => getWordsByCategory(category), [category]);
   const { isInWordBook, toggleWord } = useWordBook();
+  const emoji = getEmoji(category);
 
   return (
     <main className="min-h-screen bg-bg pb-8">
@@ -19,7 +21,7 @@ export default function CategoryPage() {
         <TopNav />
 
         <div className="mt-2 mb-5">
-          <h1 className="text-xl font-bold text-text-main tracking-tight">{category}</h1>
+          <h1 className="text-xl font-bold text-text-main tracking-tight">{emoji} {category}</h1>
           <p className="text-sm text-text-sub mt-1">{words.length}개 단어</p>
         </div>
 

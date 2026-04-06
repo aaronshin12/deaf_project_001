@@ -1,28 +1,14 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="180" height="180" rx="40" fill="#FAF6F0"/>
-  <!-- Palm -->
-  <rect x="40" y="45" width="100" height="90" rx="30" fill="#F0C4A8"/>
-  <!-- Thumb -->
-  <ellipse cx="28" cy="82" rx="18" ry="26" fill="#F0C4A8" transform="rotate(-10 28 82)"/>
-  <!-- Eyes -->
-  <ellipse cx="68" cy="82" rx="14" ry="15" fill="white"/>
-  <ellipse cx="112" cy="82" rx="14" ry="15" fill="white"/>
-  <circle cx="71" cy="82" r="8" fill="#2D2B2A"/>
-  <circle cx="115" cy="82" r="8" fill="#2D2B2A"/>
-  <circle cx="67" cy="78" r="3.5" fill="white"/>
-  <circle cx="111" cy="78" r="3.5" fill="white"/>
-  <!-- Eyebrows -->
-  <path d="M52 64 Q68 56 82 64" stroke="#C4956A" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
-  <path d="M98 64 Q112 56 128 64" stroke="#C4956A" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
-  <!-- Smile -->
-  <path d="M76 102 Q90 114 104 102" stroke="#C4956A" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-  <!-- Blush -->
-  <ellipse cx="56" cy="96" rx="8" ry="5" fill="#F0B8A0" opacity="0.5"/>
-  <ellipse cx="124" cy="96" rx="8" ry="5" fill="#F0B8A0" opacity="0.5"/>
-  <!-- Legs -->
-  <rect x="55" y="130" width="26" height="34" rx="13" fill="#F0C4A8"/>
-  <rect x="99" y="130" width="26" height="34" rx="13" fill="#F0C4A8"/>
-  <!-- Nails -->
-  <rect x="60" y="156" width="16" height="10" rx="6" fill="#FDDDD2"/>
-  <rect x="104" y="156" width="16" height="10" rx="6" fill="#FDDDD2"/>
+  <ellipse cx="90" cy="105" rx="52" ry="52" fill="#D97757"/>
+  <ellipse cx="90" cy="117" rx="34" ry="34" fill="#F0B8A0"/>
+  <circle cx="72" cy="89" r="20" fill="white"/>
+  <circle cx="108" cy="89" r="20" fill="white"/>
+  <circle cx="74" cy="89" r="10" fill="#2D2B2A"/>
+  <circle cx="110" cy="89" r="10" fill="#2D2B2A"/>
+  <circle cx="70" cy="85" r="4" fill="white"/>
+  <circle cx="106" cy="85" r="4" fill="white"/>
+  <path d="M82 99 L90 109 L98 99 Z" fill="#C4956A"/>
+  <path d="M55 72 Q72 62 86 72" stroke="#C4623F" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <path d="M94 72 Q108 62 125 72" stroke="#C4623F" strokeWidth="4" strokeLinecap="round" fill="none"/>
 </svg>

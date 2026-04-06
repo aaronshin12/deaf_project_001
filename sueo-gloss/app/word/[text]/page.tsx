@@ -3,8 +3,7 @@
 import { useState, useMemo } from "react";
 import { useParams } from "next/navigation";
 import TopNav from "@/components/TopNav";
-import NoteEditor from "@/components/NoteEditor";
-import { useNotes, useWordBook } from "@/lib/useUserData";
+import { useWordBook } from "@/lib/useUserData";
 import { getWord } from "@/lib/signData";
 import { buildSearchUrl } from "@/lib/buildDictUrl";
 
@@ -13,7 +12,6 @@ export default function WordPage() {
   const wordText = decodeURIComponent(params.text as string);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
-  const { getNote, setNote } = useNotes();
   const { isInWordBook, toggleWord } = useWordBook();
 
   const signData = useMemo(() => getWord(wordText), [wordText]);
@@ -48,28 +46,22 @@ export default function WordPage() {
           </button>
         </div>
 
-        {/* Embedded sign data from JSON */}
+        {/* Sign data - no labels */}
         {signData && (signData.signDescription || signImages.length > 0) && (
           <div className="bg-card border border-card-border rounded-card p-4 card-shadow mb-4 space-y-3">
             {signData.signDescription && (
-              <div>
-                <h3 className="text-xs font-semibold text-accent uppercase tracking-wide mb-1.5">수형 설명</h3>
-                <p className="text-sm text-text-main leading-relaxed">{signData.signDescription}</p>
-              </div>
+              <p className="text-base text-text-main leading-relaxed">{signData.signDescription}</p>
             )}
             {signImages.length > 0 && (
-              <div>
-                <h3 className="text-xs font-semibold text-text-light uppercase tracking-wide mb-2">수형 이미지</h3>
-                <div className="flex gap-2 overflow-x-auto pb-2">
-                  {signImages.map((img, i) => (
-                    <img
-                      key={i}
-                      src={img}
-                      alt={`${wordText} 수형 ${i + 1}`}
-                      className="w-28 h-28 object-cover rounded-xl border border-card-border flex-shrink-0 bg-bg-warm"
-                    />
-                  ))}
-                </div>
+              <div className="flex gap-2 overflow-x-auto pb-2">
+                {signImages.map((img, i) => (
+                  <img
+                    key={i}
+                    src={img}
+                    alt={`${wordText} 수형 ${i + 1}`}
+                    className="w-28 h-28 object-cover rounded-xl border border-card-border flex-shrink-0 bg-bg-warm"
+                  />
+                ))}
               </div>
             )}
           </div>
@@ -116,15 +108,6 @@ export default function WordPage() {
               title={`${wordText} 수어사전`}
             />
           </div>
-        </div>
-
-        {/* Note editor */}
-        <div className="mb-4">
-          <NoteEditor
-            word={wordText}
-            note={getNote(wordText)}
-            onSave={setNote}
-          />
         </div>
       </div>
     </main>

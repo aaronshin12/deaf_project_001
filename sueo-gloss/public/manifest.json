@@ -1,0 +1,18 @@
+{
+  "name": "수엉이",
+  "short_name": "수엉이",
+  "description": "수어 단어 학습 도우미",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2D2B2A",
+  "theme_color": "#2D2B2A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

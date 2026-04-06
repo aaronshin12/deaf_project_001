@@ -72,22 +72,24 @@ export default function Home() {
           <path d="M450 225 Q458 215 466 225 Q458 220 450 225Z" fill="#403E3C" />
         </svg>
         <div className="max-w-app mx-auto relative z-10">
-          {/* Share button - subtle, top right */}
+          {/* Install to homescreen button */}
           <div className="flex justify-end pt-3">
             <button
               onClick={() => {
-                if (navigator.share) {
-                  navigator.share({ title: "수엉이", url: window.location.origin });
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+                if (isIOS) {
+                  alert("하단의 공유 버튼(□↑)을 누른 후\n\"홈 화면에 추가\"를 선택하세요.");
+                } else if ((window as any).deferredPrompt) {
+                  (window as any).deferredPrompt.prompt();
                 } else {
-                  navigator.clipboard.writeText(window.location.origin);
-                  alert("링크가 복사되었습니다!");
+                  alert("브라우저 메뉴(⋮)에서\n\"홈 화면에 추가\"를 선택하세요.");
                 }
               }}
-              className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#3D3B3A] transition-colors opacity-50 hover:opacity-80"
-              aria-label="공유하기"
+              className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#3D3B3A] transition-colors opacity-60 hover:opacity-90"
+              aria-label="홈 화면에 추가"
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="#8A8480">
-                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5D87A">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
               </svg>
             </button>
           </div>

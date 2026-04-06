@@ -267,25 +267,10 @@ function WeekEditor({
           <div className="space-y-2 mb-3">
             {week.words.map((word) => (
               <div key={word.text} className="flex items-center gap-2 bg-bg rounded-xl px-3 py-2">
-                <span className="flex-1 text-sm text-text-main">
-                  {word.text}
-                  {word.description && <span className="text-xs text-text-sub ml-2">— {word.description}</span>}
-                </span>
-                <button
-                  onClick={() => { setEditingWord(editingWord === word.text ? null : word.text); setDescInput(word.description || ""); }}
-                  className="text-accent text-xs font-medium hover:underline"
-                >설명</button>
+                <span className="flex-1 text-sm text-text-main">{word.text}</span>
                 <button onClick={() => onRemoveWord(word.text)} className="text-red text-xs font-medium hover:underline">삭제</button>
               </div>
             ))}
-            {editingWord && (
-              <div className="flex gap-2">
-                <input value={descInput} onChange={(e) => setDescInput(e.target.value)} placeholder={`'${editingWord}' 설명`}
-                  className="flex-1 bg-bg border border-card-border rounded-xl p-2 text-xs text-text-main placeholder-text-light outline-none focus:border-accent/50" />
-                <button onClick={() => { onUpdateDescription(editingWord, descInput); setEditingWord(null); }}
-                  className="px-3 py-2 bg-accent text-white text-xs font-medium rounded-xl">저장</button>
-              </div>
-            )}
           </div>
 
           <div className="flex gap-2">

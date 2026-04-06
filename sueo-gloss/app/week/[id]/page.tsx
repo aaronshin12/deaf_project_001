@@ -100,13 +100,12 @@ export default function WeekPage() {
           </div>
         </div>
 
-        {/* Word list */}
+        {/* Word list — sorted alphabetically (가나다순) */}
         <div className="space-y-2.5">
-          {week.words.map((word) => (
+          {[...week.words].sort((a, b) => a.text.localeCompare(b.text, 'ko')).map((word) => (
             <WordItem
               key={word.text}
               text={word.text}
-              description={word.description}
               isReviewed={isMarked(word.text)}
               hasNote={hasNote(word.text)}
               onToggleReview={() => toggleMark(word.text)}

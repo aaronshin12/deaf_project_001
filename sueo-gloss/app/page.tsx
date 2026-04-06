@@ -3,12 +3,10 @@
 import { useState, useEffect } from "react";
 import OwlMascot from "@/components/OwlMascot";
 import WeekCard from "@/components/WeekCard";
-import { useNotes, useReviewMarks } from "@/lib/useUserData";
 import Link from "next/link";
 
 interface Word {
   text: string;
-  description?: string;
 }
 
 interface Week {
@@ -25,8 +23,6 @@ interface Curriculum {
 export default function Home() {
   const [curriculum, setCurriculum] = useState<Curriculum | null>(null);
   const [loading, setLoading] = useState(true);
-  const { hasNote } = useNotes();
-  const { isMarked } = useReviewMarks();
 
   useEffect(() => {
     fetch("/api/curriculum")
@@ -47,15 +43,15 @@ export default function Home() {
         </div>
 
         {/* Review button */}
-        <div className="mt-2 mb-4">
+        <div className="mt-2 mb-6">
           <Link
             href="/review"
-            className="flex items-center justify-center gap-2 w-full py-3 bg-clay-light border border-clay/20 rounded-card text-clay font-semibold text-sm hover:bg-clay/10 transition-colors"
+            className="flex items-center justify-center gap-2 w-full py-3.5 bg-clay-light border border-clay/30 rounded-card text-text-main font-bold text-sm hover:bg-clay/15 transition-colors"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#C4956A">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
-            복습 목록 보기
+            복습하기
           </Link>
         </div>
 
@@ -69,27 +65,14 @@ export default function Home() {
             </div>
           </div>
         ) : curriculum?.weeks ? (
-          <div className="mt-4 space-y-3">
-            {curriculum.weeks.map((week) => {
-              const reviewCount = week.words.filter((w) =>
-                isMarked(w.text)
-              ).length;
-              const noteCount = week.words.filter((w) =>
-                hasNote(w.text)
-              ).length;
-
-              return (
-                <WeekCard
-                  key={week.id}
-                  id={week.id}
-                  title={week.title}
-                  description={week.description}
-                  wordCount={week.words.length}
-                  reviewCount={reviewCount}
-                  noteCount={noteCount}
-                />
-              );
-            })}
+          <div className="space-y-4">
+            {curriculum.weeks.map((week) => (
+              <WeekCard
+                key={week.id}
+                id={week.id}
+                title={week.title}
+              />
+            ))}
           </div>
         ) : (
           <div className="text-center py-8">

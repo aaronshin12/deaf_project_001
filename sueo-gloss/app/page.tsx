@@ -137,12 +137,15 @@ export default function Home() {
         )}
 
         {/* Footer */}
-        <footer className="mt-8 text-center pb-4">
+        <footer className="mt-8 text-center pb-4 space-y-1.5">
           <p className="text-xs text-text-light">
             수어 데이터 출처:{" "}
             <a href="https://sldict.korean.go.kr/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
               국립국어원 한국수어사전
             </a>
+          </p>
+          <p className="text-[10px] text-text-light">
+            © 2026 수엉이. 비상업적 용도로만 사용 가능합니다.
           </p>
         </footer>
       </div>

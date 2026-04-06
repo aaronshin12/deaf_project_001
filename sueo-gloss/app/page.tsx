@@ -134,23 +134,27 @@ export default function Home() {
       </div>
 
       <div className="max-w-app mx-auto px-4">
-        {/* My wordbook link - accent color */}
-        <Link href="/my-words" className="block mt-5 mb-5">
-          <div className="bg-accent/10 border-2 border-accent/30 rounded-card px-4 py-3.5 flex items-center justify-between hover:bg-accent/15 transition-colors">
-            <div className="flex items-center gap-2.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#D97757">
+        {/* Wordbook + Recently viewed — side by side */}
+        <div className="grid grid-cols-2 gap-2.5 mt-5 mb-5">
+          <Link href="/my-words">
+            <div className="bg-accent/10 border-2 border-accent/30 rounded-card px-3.5 py-3.5 hover:bg-accent/15 transition-colors text-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#D97757" className="mx-auto mb-1">
                 <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
               </svg>
-              <span className="text-sm font-bold text-accent">내 단어장</span>
+              <span className="text-sm font-bold text-accent block">내 단어장</span>
+              <span className="text-xs text-accent/70">{allWords.length}개</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs text-accent font-medium">{allWords.length}개</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="#D97757">
-                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
+          </Link>
+          <Link href="/recent">
+            <div className="bg-card border border-card-border rounded-card px-3.5 py-3.5 card-shadow hover:border-accent/30 transition-colors text-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#7A7168" className="mx-auto mb-1">
+                <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" />
               </svg>
+              <span className="text-sm font-bold text-text-main block">최근 본 단어</span>
+              <span className="text-xs text-text-light">기록</span>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
 
         {/* Categories - 3 col grid */}
         {categories.length > 0 && (

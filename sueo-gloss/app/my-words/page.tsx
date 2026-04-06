@@ -10,8 +10,11 @@ export default function MyWordsPage() {
   const { allWords, customWords, removeWord, addWord, removeCustomWord } = useWordBook();
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<{ title: string }[]>([]);
+  const [sortBy, setSortBy] = useState<"abc" | "added">("abc");
 
-  const sortedWords = [...allWords].sort((a, b) => a.localeCompare(b, "ko"));
+  const sortedWords = sortBy === "abc"
+    ? [...allWords].sort((a, b) => a.localeCompare(b, "ko"))
+    : [...allWords];
 
   useEffect(() => {
     if (query.trim()) {
@@ -33,11 +36,21 @@ export default function MyWordsPage() {
       <div className="max-w-app mx-auto px-4">
         <TopNav showBack />
 
-        <div className="mt-2 mb-4">
-          <h1 className="text-xl font-bold text-text-main tracking-tight">내 단어장</h1>
-          <p className="text-sm text-text-sub mt-1">
-            {sortedWords.length > 0 ? `${sortedWords.length}개의 단어` : "저장된 단어가 없습니다"}
-          </p>
+        <div className="mt-2 mb-4 flex items-start justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-text-main tracking-tight">내 단어장</h1>
+            <p className="text-sm text-text-sub mt-1">
+              {sortedWords.length > 0 ? `${sortedWords.length}개의 단어` : "저장된 단어가 없습니다"}
+            </p>
+          </div>
+          {sortedWords.length > 1 && (
+            <button
+              onClick={() => setSortBy(sortBy === "abc" ? "added" : "abc")}
+              className="px-3 py-1.5 rounded-lg text-xs font-bold bg-card border border-card-border text-text-sub hover:border-accent/30 transition-all mt-1"
+            >
+              {sortBy === "abc" ? "가나다순" : "추가순"} ↕
+            </button>
+          )}
         </div>
 
         {/* Search to add */}

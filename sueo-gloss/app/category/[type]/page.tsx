@@ -1,29 +1,67 @@
 "use client";
 
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import TopNav from "@/components/TopNav";
-import { getWordsByCategory } from "@/lib/signData";
+import { getWordsByCategory, CONSONANT_GROUPS, filterByConsonantGroup } from "@/lib/signData";
 import { useWordBook } from "@/lib/useUserData";
 import { getEmoji } from "@/lib/categoryEmojis";
 
 export default function CategoryPage() {
   const params = useParams();
   const category = decodeURIComponent(params.type as string);
-  const words = useMemo(() => getWordsByCategory(category), [category]);
+  const allWords = useMemo(() => getWordsByCategory(category), [category]);
   const { isInWordBook, toggleWord } = useWordBook();
   const emoji = getEmoji(category);
+  const [activeGroup, setActiveGroup] = useState<number | null>(null);
+
+  const isEtc = category === "기타";
+
+  const words = useMemo(() => {
+    if (!isEtc || activeGroup === null) return allWords;
+    return filterByConsonantGroup(allWords, CONSONANT_GROUPS[activeGroup].consonants)
+      .sort((a, b) => a.title.localeCompare(b.title, "ko"));
+  }, [allWords, activeGroup, isEtc]);
 
   return (
     <main className="min-h-screen bg-bg pb-8">
       <div className="max-w-app mx-auto px-4">
         <TopNav />
 
-        <div className="mt-2 mb-5">
+        <div className="mt-2 mb-4">
           <h1 className="text-xl font-bold text-text-main tracking-tight">{emoji} {category}</h1>
           <p className="text-sm text-text-sub mt-1">{words.length}개 단어</p>
         </div>
+
+        {/* Consonant filter for 기타 */}
+        {isEtc && (
+          <div className="flex gap-1.5 mb-4 overflow-x-auto pb-1">
+            <button
+              onClick={() => setActiveGroup(null)}
+              className={`flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-bold transition-all ${
+                activeGroup === null
+                  ? "bg-accent text-white"
+                  : "bg-card border border-card-border text-text-sub hover:border-accent/30"
+              }`}
+            >
+              전체
+            </button>
+            {CONSONANT_GROUPS.map((group, i) => (
+              <button
+                key={group.label}
+                onClick={() => setActiveGroup(i)}
+                className={`flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-bold transition-all ${
+                  activeGroup === i
+                    ? "bg-accent text-white"
+                    : "bg-card border border-card-border text-text-sub hover:border-accent/30"
+                }`}
+              >
+                {group.label}
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="space-y-2.5">
           {words.map((word) => (

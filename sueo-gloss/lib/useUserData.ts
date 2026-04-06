@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from "react";
 
 const NOTES_KEY = "sueo-gloss-notes";
+const RECENTLY_VIEWED_KEY = "sueo-gloss-recently-viewed";
 const WORDBOOK_KEY = "sueo-gloss-wordbook";
 const CUSTOM_WORDS_KEY = "sueo-gloss-custom-words";
 
@@ -52,6 +53,29 @@ export function useNotes() {
   );
 
   return { notes, setNote, getNote, hasNote };
+}
+
+export function useRecentlyViewed() {
+  const [viewed, setViewed] = useState<string[]>([]);
+
+  useEffect(() => {
+    setViewed(loadFromStorage(RECENTLY_VIEWED_KEY, []));
+  }, []);
+
+  const addViewed = useCallback((word: string) => {
+    setViewed((prev) => {
+      const updated = [word, ...prev.filter((w) => w !== word)].slice(0, 20);
+      saveToStorage(RECENTLY_VIEWED_KEY, updated);
+      return updated;
+    });
+  }, []);
+
+  const clearViewed = useCallback(() => {
+    setViewed([]);
+    saveToStorage(RECENTLY_VIEWED_KEY, []);
+  }, []);
+
+  return { viewed, addViewed, clearViewed };
 }
 
 export function useWordBook() {

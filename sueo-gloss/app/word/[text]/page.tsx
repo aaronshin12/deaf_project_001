@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useParams } from "next/navigation";
 import TopNav from "@/components/TopNav";
-import { useWordBook } from "@/lib/useUserData";
+import { useWordBook, useRecentlyViewed } from "@/lib/useUserData";
 import { getWord } from "@/lib/signData";
 import { buildSearchUrl } from "@/lib/buildDictUrl";
 
@@ -11,7 +11,9 @@ export default function WordPage() {
   const params = useParams();
   const wordText = decodeURIComponent(params.text as string);
   const { isInWordBook, toggleWord } = useWordBook();
+  const { addViewed } = useRecentlyViewed();
   const [popupImage, setPopupImage] = useState<string | null>(null);
+  const [isLooping, setIsLooping] = useState(false);
 
   const signData = useMemo(() => getWord(wordText), [wordText]);
   const inWordBook = isInWordBook(wordText);
@@ -21,6 +23,11 @@ export default function WordPage() {
     ? signData.signImages.split(",").map((s) => s.trim()).filter(Boolean)
     : [];
   const fallbackUrl = signData?.url || buildSearchUrl(wordText);
+
+  // Record recently viewed
+  useEffect(() => {
+    addViewed(wordText);
+  }, [wordText, addViewed]);
 
   return (
     <main className="min-h-screen bg-bg pb-8">
@@ -44,18 +51,33 @@ export default function WordPage() {
 
         {/* Video player - direct MP4 */}
         {videoUrl ? (
-          <div className="bg-card border border-card-border rounded-card overflow-hidden card-shadow mb-4">
-            <video
-              src={videoUrl.replace("http://", "https://")}
-              poster={thumbnail ? thumbnail.replace("http://", "https://") : undefined}
-              controls
-              playsInline
-              preload="none"
-              className="w-full"
-            />
+          <div className="mb-1">
+            <div className="bg-card border border-card-border rounded-card overflow-hidden card-shadow">
+              <video
+                src={videoUrl.replace("http://", "https://")}
+                poster={thumbnail ? thumbnail.replace("http://", "https://") : undefined}
+                controls
+                playsInline
+                preload="none"
+                loop={isLooping}
+                className="w-full"
+              />
+            </div>
+            {/* Loop toggle */}
+            <div className="flex justify-end mt-1.5 mb-3">
+              <button
+                onClick={() => setIsLooping(!isLooping)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  isLooping
+                    ? "bg-accent text-white"
+                    : "bg-card border border-card-border text-text-sub hover:border-accent/30"
+                }`}
+              >
+                🔁 {isLooping ? "반복 중" : "반복 재생"}
+              </button>
+            </div>
           </div>
         ) : (
-          /* Fallback: iframe for custom words without video data */
           <div className="bg-card border border-card-border rounded-card overflow-hidden card-shadow mb-4">
             <div className="px-4 py-2.5 border-b border-card-border">
               <span className="text-xs font-semibold text-text-sub">수어사전</span>
@@ -70,7 +92,7 @@ export default function WordPage() {
           </div>
         )}
 
-        {/* Sign description + images — no box separation */}
+        {/* Sign description + images */}
         {(signData?.signDescription || signImages.length > 0) && (
           <div className="px-1 mb-4 space-y-3">
             {signData?.signDescription && (

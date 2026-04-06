@@ -67,6 +67,37 @@ export function getWordsByCategory(category: string): SignWord[] {
     .sort((a, b) => a.title.localeCompare(b.title, "ko"));
 }
 
+// Korean initial consonant extraction
+const INITIAL_CONSONANTS = [
+  'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ',
+  'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
+];
+
+export function getInitialConsonant(char: string): string {
+  const code = char.charCodeAt(0) - 0xAC00;
+  if (code < 0 || code > 11171) return "기타";
+  const index = Math.floor(code / 588);
+  return INITIAL_CONSONANTS[index] || "기타";
+}
+
+// Grouped consonant filters
+export const CONSONANT_GROUPS = [
+  { label: "ㄱ-ㄴ", consonants: ["ㄱ", "ㄲ", "ㄴ"] },
+  { label: "ㄷ-ㄹ", consonants: ["ㄷ", "ㄸ", "ㄹ"] },
+  { label: "ㅁ-ㅂ", consonants: ["ㅁ", "ㅂ", "ㅃ"] },
+  { label: "ㅅ-ㅇ", consonants: ["ㅅ", "ㅆ", "ㅇ"] },
+  { label: "ㅈ-ㅊ", consonants: ["ㅈ", "ㅉ", "ㅊ"] },
+  { label: "ㅋ-ㅎ", consonants: ["ㅋ", "ㅌ", "ㅍ", "ㅎ"] },
+];
+
+export function filterByConsonantGroup(words: SignWord[], consonants: string[]): SignWord[] {
+  return words.filter((w) => {
+    if (!w.title) return false;
+    const initial = getInitialConsonant(w.title[0]);
+    return consonants.includes(initial);
+  });
+}
+
 export function getAllWords(): SignWord[] {
   return signWords;
 }

@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function TopNav() {
+interface TopNavProps {
+  showBack?: boolean;
+}
+
+export default function TopNav({ showBack = false }: TopNavProps) {
   const router = useRouter();
 
   const handleRefresh = () => {
@@ -15,15 +19,27 @@ export default function TopNav() {
     <div className="flex items-center justify-between pt-4 pb-2">
       {/* Left: navigation buttons */}
       <div className="flex items-center gap-2">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold bg-card border border-card-border text-text-main hover:border-accent/40 transition-colors card-shadow"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </svg>
-          첫화면
-        </Link>
+        {showBack ? (
+          <button
+            onClick={() => router.back()}
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold bg-card border border-card-border text-text-main hover:border-accent/40 transition-colors card-shadow"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+            </svg>
+            이전 화면
+          </button>
+        ) : (
+          <Link
+            href="/"
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold bg-card border border-card-border text-text-main hover:border-accent/40 transition-colors card-shadow"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+            첫화면
+          </Link>
+        )}
         <Link
           href="/review"
           className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold bg-card border border-card-border text-text-main hover:border-clay/40 transition-colors card-shadow"

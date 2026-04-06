@@ -80,7 +80,7 @@ export default function WordPage() {
   return (
     <main className="min-h-screen bg-bg pb-8">
       <div className="max-w-app mx-auto px-4">
-        <TopNav />
+        <TopNav showBack />
 
         {/* Word header + wordbook button */}
         <div className="mt-3 mb-4 flex items-start justify-between gap-3">

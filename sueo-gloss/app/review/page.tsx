@@ -82,7 +82,7 @@ export default function WordBookPage() {
                 >
                   <Link href={`/word/${encodeURIComponent(word)}`} className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-base font-serif font-medium text-text-main">{word}</span>
+                      <span className="text-base font-serif font-bold text-text-main">{word}</span>
                       {isCustom && (
                         <span className="text-[10px] px-1.5 py-0.5 rounded bg-accent/10 text-accent font-medium">직접추가</span>
                       )}
@@ -90,9 +90,12 @@ export default function WordBookPage() {
                   </Link>
                   <button
                     onClick={() => isCustom ? removeCustomWord(word) : removeWord(word)}
-                    className="flex-shrink-0 text-xs text-text-light hover:text-red transition-colors font-medium"
+                    className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full hover:bg-red/10 transition-colors text-text-light hover:text-red"
+                    aria-label="삭제"
                   >
-                    삭제
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                    </svg>
                   </button>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="#A69E94" className="flex-shrink-0">
                     <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />

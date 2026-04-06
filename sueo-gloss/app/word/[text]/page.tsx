@@ -91,9 +91,11 @@ export default function WordPage() {
         )}
 
         {/* Data warning */}
-        <p className="text-[11px] text-text-light text-center mt-4 mb-2">
-          영상 재생 시 데이터 이용료가 발생할 수 있습니다. 와이파이 이용을 권장합니다.
-        </p>
+        <div className="bg-red/5 border border-red/20 rounded-xl px-4 py-3 mt-4 mb-2">
+          <p className="text-sm text-red text-center font-medium">
+            ⚠️ 영상 재생 시 데이터 이용료가 발생할 수 있습니다. 와이파이 이용을 권장합니다.
+          </p>
+        </div>
 
         {/* Dictionary link */}
         <a

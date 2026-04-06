@@ -83,7 +83,7 @@ export default function WordPage() {
                     key={i}
                     src={img.replace("http://", "https://")}
                     alt={`${wordText} 수형 ${i + 1}`}
-                    className="rounded-xl border border-card-border bg-bg-warm max-w-full cursor-pointer hover:opacity-80 transition-opacity"
+                    className="h-28 w-auto rounded-xl border border-card-border bg-bg-warm flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
                     onClick={() => setPopupImage(img.replace("http://", "https://"))}
                   />
                 ))}

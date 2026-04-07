@@ -2,19 +2,44 @@
  * KCISA 일상생활수어 API에서 전체 데이터를 다운로드하여 JSON으로 저장합니다.
  *
  * 사용법 (로컬 PC에서 1회 실행):
- *   node scripts/download-signs.js
+ *   1. .env.local 파일에 KCISA_API_KEY 설정
+ *      KCISA_API_KEY=발급받은_키
+ *   2. node scripts/download-signs.js
  *
  * 필요: Node.js 18+ (fetch 내장)
- * API 키: ae09a4cb-3b67-4faf-8051-95dee6c074fd
  */
 
 const fs = require("fs");
 const path = require("path");
 
+// Load .env.local manually (without dotenv dependency)
+function loadEnvLocal() {
+  const envPath = path.join(__dirname, "..", ".env.local");
+  if (!fs.existsSync(envPath)) return;
+  const content = fs.readFileSync(envPath, "utf-8");
+  for (const line of content.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const idx = trimmed.indexOf("=");
+    if (idx === -1) continue;
+    const key = trimmed.slice(0, idx).trim();
+    const value = trimmed.slice(idx + 1).trim().replace(/^["']|["']$/g, "");
+    if (!process.env[key]) process.env[key] = value;
+  }
+}
+loadEnvLocal();
+
 const API_BASE = "http://api.kcisa.kr/openapi/service/rest/meta13/getCTE01701";
-const SERVICE_KEY = "ae09a4cb-3b67-4faf-8051-95dee6c074fd";
+const SERVICE_KEY = process.env.KCISA_API_KEY;
 const OUTPUT_PATH = path.join(__dirname, "..", "data", "sign-words.json");
 const PAGE_SIZE = 100;
+
+if (!SERVICE_KEY) {
+  console.error("❌ KCISA_API_KEY가 설정되지 않았습니다.");
+  console.error("   .env.local 파일에 다음과 같이 추가하세요:");
+  console.error("   KCISA_API_KEY=발급받은_키");
+  process.exit(1);
+}
 
 async function fetchPage(pageNo) {
   const url = `${API_BASE}?serviceKey=${encodeURIComponent(SERVICE_KEY)}&numOfRows=${PAGE_SIZE}&pageNo=${pageNo}&keyword=`;
